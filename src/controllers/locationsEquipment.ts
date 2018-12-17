@@ -4,7 +4,9 @@ import { Request, Response } from 'express'
 import * as locationsEquipmentsServices from '../services/locationsEquipments'
 
 export async function getLocationsEquipment(req: Request, res: Response) {
-    const locationsEquipment = await locationsEquipmentsServices.getLocationsEquipments(req.state)
+    const locationsEquipment = await locationsEquipmentsServices.getLocationsEquipments({
+        school: req.state.school._id,
+    }, req.state)
     return locationsEquipment
 }
 

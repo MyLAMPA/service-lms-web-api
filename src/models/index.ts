@@ -2,6 +2,10 @@
 import * as Logger from 'bunyan'
 import { Document } from 'mongoose'
 
+import {
+    LMSCtx,
+} from '../types/lms'
+
 export type Partial<T> = {
     [P in keyof T]?: T[P];
 };
@@ -14,7 +18,12 @@ export type State = {
     user?: User;
     school?: School;
     activeRole?: UserRole;
+    lmsCtx?: LMSCtx
 };
+
+export type LMSContext = {
+    schoolId: string
+}
 
 export type TokenBody = {
     accessId: string;
@@ -99,22 +108,28 @@ export type Subscription = {
 }
 
 export type School = {
-    _id?: string;
-    createdAt: Date;
-    name: string;
-    abbr: string;
-    email: string;
-    mobile: string;
-    externalWebUrl: string;
-    defaultLessonDuration: number;
-    currentSchoolYear: string|SchoolYear;
-    timetableSettings: SchoolTimetableSettings;
-};
+    _id?: string
+    status: SchoolStatus
+    createdAt: Date
+    billingInfo: string|BillingInfo
+    name: string
+    abbr: string
+    externalWebUrl: string
+    defaultLessonDuration: number
+    currentSchoolYear: string|SchoolYear
+    timetableSettings: SchoolTimetableSettings
+}
+
+export type BillingInfo = {
+    _id?: string
+    companyName: string
+    email: string
+}
 
 export type SchoolTimetableSettings = {
-    startHour: Date;
-    endHour: Date;
-};
+    startHour: Date
+    endHour: Date
+}
 
 export type SchoolYear = {
     _id?: string;
@@ -402,6 +417,13 @@ export enum UserRole {
     teacher = 'teacher',
     student = 'student',
 };
+
+export enum SchoolStatus {
+    trial = 'trial',
+    active = 'active',
+    suspended = 'suspended',
+    archived = 'archived',
+}
 
 export enum LessonStatus {
     draft = 'draft',

@@ -1,9 +1,9 @@
 
-export { accessModel as accesses } from './models/access'
+// export { accessModel as accesses } from './models/access'
 export { clientModel as clients } from './models/client'
-export { courseModel as courses } from './models/course'
+// export { courseModel as courses } from './models/course'
 export { currencyModel as currencies } from './models/currency'
-export { groupModel as groups } from './models/group'
+// export { groupModel as groups } from './models/group'
 export { homeworkModel as homeworks } from './models/homework'
 export { lessonModel as lessons } from './models/lesson'
 export { locationModel as locations } from './models/location'

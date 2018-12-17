@@ -8,6 +8,8 @@ import {
 import * as _ from 'lodash'
 
 import { httpErrors as errors } from '../errors'
+import { router as graphqlRouter } from './graphql'
+import { router as apiRouter } from './api'
 
 const router = Router()
 
@@ -29,8 +31,7 @@ router
         }
     })
 
-import { router as apiRouter } from './api'
-
+router.use('/graphql', graphqlRouter)
 router.use('/api', apiRouter)
 
 router

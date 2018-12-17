@@ -39,7 +39,7 @@ export const authorizeRequest = async (req: Request, res: Response, next: NextFu
 
         const { accessId, activeRole } = <TokenBody>jwt.verify(credentials, config.auth.jwtSecret)
 
-        const access = await accessesServices.getAccessById(accessId, false, req.state)
+        const access = await accessesServices.getAccessById(accessId, req.state)
         const user = await usersServices.getUserByAccessId(access._id, req.state)
         const school = await schoolsServices.getSchoolById(<string>user.school, false, req.state)
 

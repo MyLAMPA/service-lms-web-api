@@ -7,32 +7,31 @@ import {
     State,
     Course,
 } from '../models'
-import * as db from '../repositories/mongo'
+import { coursesRepository } from '../repositories'
 
 export async function getCourses(params: object, state: State): Promise<Course[]> {
-    const courses = await db.courses.find(params).lean()
+    const courses = await coursesRepository.getCourses(params, state)
     return courses
 }
 
 export async function getCourseById(courseId: string, state: State): Promise<Course> {
-    const course = await db.courses.findById(courseId).lean()
-    if (!_.isNil(course)) {
+    const course = await coursesRepository.getCourseById(courseId, state)
+    if (course) {
         return course
     }
     throw errors.notFound('Course Not Found')
 }
 
 export async function createCourse(course: Course, state: State): Promise<Course> {
-    const _course = _.merge(
+    const document = _.merge(
         {},
         _.pick(course, ['name', 'abbr', 'description', 'color']),
         { school: state.school._id }
     )
-    const createdCourse = await db.courses.create(_course)
-    return createdCourse.toObject()
+    return await coursesRepository.createCourse(document, state)
 }
 
 export async function updateCourseById(courseId: string, change: object, state: State): Promise<Course> {
-    await db.courses.findByIdAndUpdate(courseId, change)
+    await coursesRepository.updateCourseById(courseId, change, state)
     return getCourseById(courseId, state)
 }

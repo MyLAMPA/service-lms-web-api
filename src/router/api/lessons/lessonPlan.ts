@@ -1,7 +1,7 @@
 
 import { Router } from 'express'
 
-import { handleController, limitToRole } from '../../../middlewares'
+import { authorizeRequest, handleController, limitToRole } from '../../../middlewares'
 import {
     UserRole,
 } from '../../../models'
@@ -12,13 +12,13 @@ const router = Router()
 
 router
     .route('/:lessonId/lessonPlan')
-    .get(limitToRole([UserRole.admin, UserRole.teacher, UserRole.student]), handleController(lessonPlansControllers.getLessonPlan))
-    .put(limitToRole([UserRole.admin, UserRole.teacher]), handleController(lessonPlansControllers.putLessonPlan))
+    .get(authorizeRequest, limitToRole([UserRole.admin, UserRole.teacher, UserRole.student]), handleController(lessonPlansControllers.getLessonPlan))
+    .put(authorizeRequest, limitToRole([UserRole.admin, UserRole.teacher]), handleController(lessonPlansControllers.putLessonPlan))
 
 router
     .route('/:lessonId/lessonPlan/outcomes')
-    // .get(limitToRole([UserRole.admin, UserRole.teacher, UserRole.student]), handleController())
-    // .post(limitToRole([UserRole.admin, UserRole.teacher]), handleController())
+    // .get(authorizeRequest, limitToRole([UserRole.admin, UserRole.teacher, UserRole.student]), handleController())
+    // .post(authorizeRequest, limitToRole([UserRole.admin, UserRole.teacher]), handleController())
 
 router
     .route('/:lessonId/lessonPlan/export')

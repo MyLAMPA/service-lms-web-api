@@ -1,14 +1,23 @@
 
 import * as _ from 'lodash'
 
+import { httpErrors as errors } from '../errors'
 import {
     State,
     LocationEquipment,
 } from '../models'
 import * as db from '../repositories/mongo'
 
-export async function getLocationsEquipments(state: State): Promise<LocationEquipment[]> {
-    const locationsEquipments = await db.locationEquipment.find({ school: state.school._id })
+export async function getLocationEquipmentById(locationEquipmentId: string, state: State): Promise<LocationEquipment> {
+    const locationEquipment = await db.locationEquipment.findById(locationEquipmentId)
+    if (locationEquipment) {
+        return locationEquipment
+    }
+    throw errors.notFound('LocationEquipment Not Found')
+}
+
+export async function getLocationsEquipments(params: object, state: State): Promise<LocationEquipment[]> {
+    const locationsEquipments = await db.locationEquipment.find(params)
     return locationsEquipments.map(locationEquipment => locationEquipment.toObject())
 }
 

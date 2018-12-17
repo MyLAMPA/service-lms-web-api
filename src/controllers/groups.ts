@@ -22,7 +22,13 @@ export async function getGroups(req: Request, res: Response) {
             throw errors.forbidden('Forbidden Groups')
     }
 
-    const groups = await groupsServices.getGroups(query, populateCourse, req.state)
+    let groups = []
+    if (populateCourse) {
+        groups = await groupsServices.getGroupsWithCourse(query, req.state)
+    } else {
+        groups = await groupsServices.getGroups(query, req.state)
+    }
+
     return groups
 }
 

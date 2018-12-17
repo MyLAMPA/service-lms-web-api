@@ -40,14 +40,14 @@ export async function loginUsingCredentials(credentials: Credentials, state: Sta
         }
 
         user = await usersServices.getUserByEmail(credentials.email, state)
-        access = await accessesServices.getAccessById(<string>user.access, true, state)
+        access = await accessesServices.getAccessByIdWithPassword(user.access as string, state)
     } catch (err) {
         try {
             if (!_.isString(credentials.username)) {
                 throw errors.unauthorized('Empty Username')
             }
             
-            access = await accessesServices.getAccessByUsername(credentials.username, true, state)
+            access = await accessesServices.getAccessByUsernameWithPassword(credentials.username, state)
             user = await usersServices.getUserByAccessId(access._id, state)
         } catch (err) {
             state.logger.info({ err }, 'Invalid Username')

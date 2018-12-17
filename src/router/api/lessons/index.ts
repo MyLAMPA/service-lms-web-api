@@ -1,7 +1,7 @@
 
 import { Router } from 'express'
 
-import { handleController, limitToRole } from '../../../middlewares'
+import { authorizeRequest, handleController, limitToRole } from '../../../middlewares'
 import {
     UserRole,
 } from '../../../models'
@@ -17,18 +17,18 @@ const router = Router()
 
 router
     .route('/')
-    .get(handleController(lessonsControllers.getLessons))
-    .post(limitToRole(UserRole.admin), handleController(lessonsControllers.postLessons))
+    .get(authorizeRequest, handleController(lessonsControllers.getLessons))
+    .post(authorizeRequest, limitToRole(UserRole.admin), handleController(lessonsControllers.postLessons))
 
 router
     .route('/:lessonId')
-    .get(handleController(lessonsControllers.getLesson))
-    .put(limitToRole(UserRole.admin), handleController(lessonsControllers.putLesson))
+    .get(authorizeRequest, handleController(lessonsControllers.getLesson))
+    .put(authorizeRequest, limitToRole(UserRole.admin), handleController(lessonsControllers.putLesson))
 
 router.use('/', lessonPlanRouter)
-router.use('/', activitiesRouter)
-router.use('/', lessonAttendanceRouter)
-router.use('/', lessonReachersNotesRouter)
-router.use('/', lessonOutcomesRouter)
+router.use('/', authorizeRequest, activitiesRouter)
+router.use('/', authorizeRequest, lessonAttendanceRouter)
+router.use('/', authorizeRequest, lessonReachersNotesRouter)
+router.use('/', authorizeRequest, lessonOutcomesRouter)
 
 export { router }

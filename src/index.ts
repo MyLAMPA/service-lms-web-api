@@ -5,12 +5,19 @@ import { logger } from './components/logger'
 
 const port = config.server.port
 
-Promise
-    .all([
-        new Promise(resolve => {
-            server.listen(port, resolve)
-        }),
-    ])
+class Application {
+    private static startServer() {
+        return new Promise(r => server.listen(port, r))
+    }
+
+    public static async start() {
+        // await (new Promise(r => setTimeout(r, 2000)))
+        await Application.startServer()
+    }
+}
+
+Application
+    .start()
     .then(() => {
         logger.info({
             port,
