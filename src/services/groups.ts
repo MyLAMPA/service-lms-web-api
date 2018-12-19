@@ -10,33 +10,21 @@ import {
 import { groupsRepository } from '../repositories'
 
 export async function getGroupsWithCourse(params: object, state: State) {
-    const groups = await groupsRepository.getGroups(params, true, state)
-    return groups
+    throw errors.serverError('deprached api')
 }
 
 export async function getGroups(params: object, state: State) {
-    const groups = await groupsRepository.getGroups(params, false, state)
-    return groups
+    throw errors.serverError('deprached api')
 }
 
 export async function getGroupById(groupId: string, state: State): Promise<Group> {
-    const group = await groupsRepository.getGroupById(groupId, state)
-    if (group) {
-        return group
-    }
-    throw errors.notFound('Group Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function createGroup(group: Group, state: State): Promise<Group> {
-    const document = _.merge(
-        {},
-        _.pick(group, ['course', 'name', 'abbr', 'description', 'capacity', 'students', 'color']),
-        { school: state.school._id }
-    )
-    const createdGroup = await groupsRepository.createGroup(document, state)
-    return createdGroup
+    throw errors.serverError('deprached api')
 }
 
 export async function updateGroupById(groupId: string, change: object, state: State): Promise<Group> {
-    return await groupsRepository.updateGroupById(groupId, change, state)
+    throw errors.serverError('deprached api')
 }

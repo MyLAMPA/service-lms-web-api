@@ -12,19 +12,13 @@ import {
 import { schoolMembershipsRepository } from '../repositories'
 
 export async function getActiveUserMemberships(userId: string, state: State): Promise<SchoolMembership[]> {
-    const schoolMemberships = await schoolMembershipsRepository.getSchoolMemberships({ user: userId }, false, state)
-    return schoolMemberships
+    throw errors.serverError('deprached api')
 }
 
 export async function getActiveUserMembershipsWithSchool(userId: string, state: State): Promise<SchoolMembership[]> {
-    const schoolMemberships = await schoolMembershipsRepository.getSchoolMemberships({ user: userId }, true, state)
-    return schoolMemberships
+    throw errors.serverError('deprached api')
 }
 
 export async function getSchoolMembershipById(schoolMembershipId: string, state: State): Promise<SchoolMembership> {
-    const schoolMembership = await schoolMembershipsRepository.getSchoolMembershipById(schoolMembershipId, state)
-    if (schoolMembership) {
-        return schoolMembership
-    }
-    throw errors.notFound('SchoolMembership Not Found')
+    throw errors.serverError('deprached api')
 }

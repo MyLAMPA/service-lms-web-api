@@ -6,7 +6,6 @@ import * as _ from 'lodash'
 
 import { config } from '../config'
 import { httpErrors as errors } from '../errors'
-import * as db from '../repositories/mongo'
 import {
     Partial,
     State,
@@ -20,54 +19,13 @@ import * as accessesServices from './accesses'
 import * as usersServices from './users'
 
 export async function hashPassword(plainPassword: string, state: State): Promise<string> {
-    return bcrypt.hashSync(plainPassword, bcrypt.genSaltSync(config.auth.hashSaltRounds))
+    throw errors.serverError('deprached api')
 }
 
 export async function issueBearerToken(accessId: string, activeRole: UserRole, state: State): Promise<string> {
-    const token: TokenBody = { accessId, activeRole }
-    return jwt.sign(token, config.auth.jwtSecret, {
-        expiresIn: 60 * 60 * 24 * 7, // 7 days
-    })
+    throw errors.serverError('deprached api')
 }
 
 export async function loginUsingCredentials(credentials: Credentials, state: State): Promise<{ bearerToken: string; activeRole: UserRole; }> {
-    let user: User = null
-    let access: Access = null
-    
-    try {
-        if (!_.isString(credentials.email)) {
-            throw errors.unauthorized('Empty Email')
-        }
-
-        user = await usersServices.getUserByEmail(credentials.email, state)
-        access = await accessesServices.getAccessByIdWithPassword(user.access as string, state)
-    } catch (err) {
-        try {
-            if (!_.isString(credentials.username)) {
-                throw errors.unauthorized('Empty Username')
-            }
-            
-            access = await accessesServices.getAccessByUsernameWithPassword(credentials.username, state)
-            user = await usersServices.getUserByAccessId(access._id, state)
-        } catch (err) {
-            state.logger.info({ err }, 'Invalid Username')
-            throw errors.unauthorized('Invalid Credentials')
-        }
-    }
-
-    if (!access.isActive) {
-        state.logger.info({ user, access: _.pick(access, ['_id', 'isActive', 'username']) }, 'Attempt to use inactive Access')
-        throw errors.unauthorized('Access Is Not Active')
-    }
-
-    if (!bcrypt.compareSync(credentials.password, access.password)) {
-        throw errors.unauthorized('Invalid Credentials')
-    }
-
-    const bearerToken = await issueBearerToken(access._id, user.defaultActiveRole, state)
-    
-    return {
-        bearerToken,
-        activeRole: user.defaultActiveRole,
-    }
+    throw errors.serverError('deprached api')
 }

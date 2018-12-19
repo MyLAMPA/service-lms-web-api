@@ -40,6 +40,7 @@ export type AuthConfig = {
 export type MongooseConfig = {
     uri: string;
     db: string;
+    tablePrefix: string;
 };
 
 export type SMTPConfig = {

@@ -10,54 +10,29 @@ import {
 import { accessesRepository } from '../repositories'
 
 export async function getAccessByIdWithPassword(accessId: string, state: State): Promise<Access> {
-    const access = accessesRepository.getAccessById(accessId, true, state)
-    if (access) {
-        return access
-    }
-    throw errors.notFound('Access Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function getAccessById(accessId: string, state: State): Promise<Access> {
-    const access = accessesRepository.getAccessById(accessId, false, state)
-    if (access) {
-        return access
-    }
-    throw errors.notFound('Access Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function getAccessByUserId(userId: string, state: State): Promise<Access> {
-    const access = await accessesRepository.getAccessByUserId(userId, state)
-    if (access) {
-        return access
-    }
-    throw errors.notFound('Access Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function getAccessByUsernameWithPassword(username: string, state: State): Promise<Access> {
-    const access = accessesRepository.getAccessByUsername(username, true, state)
-    if (access) {
-        return access
-    }
-    throw errors.notFound('Access Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function getAccessByUsername(username: string, state: State): Promise<Access> {
-    const access = accessesRepository.getAccessByUsername(username, false, state)
-    if (access) {
-        return access
-    }
-    throw errors.notFound('Access Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function getActiveAccessByUsername(username: string, state: State): Promise<Access> {
-    const access = await accessesRepository.getActiveAccessByUsername(username, state)
-    if (access) {
-        return access
-    }
-    throw errors.notFound('Access Not Found')
+    throw errors.serverError('deprached api')
 }
 
 export async function isUsernameInUse(username: string, state: State): Promise<boolean> {
-    const access = await accessesRepository.getAccessByUsername(username, false, state)
-    return !!access
+    throw errors.serverError('deprached api')
 }

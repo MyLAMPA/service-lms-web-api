@@ -7,7 +7,7 @@ import {
 
 import { Context } from '../../../types/lms/context'
 import * as lmsContextServices from '../../../../services/lms/context'
-import * as schoolMembershipsServices from '../../../../services/schoolMemberships'
+// import * as schoolMembershipsServices from '../../../../services/schoolMemberships'
 
 /*import { school } from '../../../resolvers/lms/school'
 import { schoolYears } from '../../../resolvers/lms/schoolYears'
