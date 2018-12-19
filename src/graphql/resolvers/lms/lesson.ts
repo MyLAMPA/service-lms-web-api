@@ -14,7 +14,7 @@ import {
     SchoolMembershipRole,
 } from '../../../types/user'
 import { Lesson } from '../../types'
-import * as lessonsServices from '../../../services/lessons'
+import * as lessonsServices from '../../../services/lms/lessons'
 
 export const lesson = {
     type: Lesson.Model,
@@ -63,7 +63,7 @@ export const lessons = {
             searchParams.start = { $lt: moment(dateTo).toDate() }
         }
 
-        const lessons = await lessonsServices.getLessons(searchParams, true, true, true, true, true, state)
+        const lessons = await lessonsServices.getLessons(searchParams, state)
         return lessons
     },
 }

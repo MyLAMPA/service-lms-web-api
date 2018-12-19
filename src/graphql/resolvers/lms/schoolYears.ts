@@ -13,7 +13,7 @@ import {
     SchoolMembershipRole,
 } from '../../../types/user'
 import { SchoolYear } from '../../types'
-import * as schoolYearsServices from '../../../services/schoolYears'
+import * as schoolYearsServices from '../../../services/lms/schoolYears'
 
 export const schoolYears = {
     type: new GraphQLList(SchoolYear.Model),

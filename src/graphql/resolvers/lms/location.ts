@@ -13,7 +13,7 @@ import {
     SchoolMembershipRole,
 } from '../../../types/user'
 import { Location } from '../../types'
-import * as locationsServices from '../../../services/locations'
+import * as locationsServices from '../../../services/lms/locations'
 
 export const location = {
     type: Location.Model,

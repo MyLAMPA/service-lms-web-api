@@ -20,13 +20,13 @@ import { Model as LocationModel } from './location'
 import { Model as StudentModel } from './student'
 import { Model as TeacherModel } from './teacher'
 import { Model as HomeworkModel } from './homework'
-import * as lessonsServices from '../../services/lessons'
-import * as groupsServices from '../../services/groups'
-import * as coursesServices from '../../services/courses'
-import * as locationsServices from '../../services/locations'
-import * as studentsServices from '../../services/students'
-import * as teachersServices from '../../services/teachers'
-import * as homeworksServices from '../../services/homeworks'
+import * as lessonsServices from '../../services/lms/lessons'
+import * as groupsServices from '../../services/lms/groups'
+import * as coursesServices from '../../services/lms/courses'
+import * as locationsServices from '../../services/lms/locations'
+import * as studentsServices from '../../services/lms/students'
+import * as teachersServices from '../../services/lms/teachers'
+import * as homeworksServices from '../../services/lms/homeworks'
 
 export const LessonPlanOutcomeModel = new GraphQLObjectType({
     name: 'LessonPlanOutcome',
@@ -313,13 +313,13 @@ export const Model = new GraphQLObjectType({
         notes: {
             type: GraphQLString,
         },
-        attendance: {
-            type: new GraphQLList(LessonAttendeeModel),
-            async resolve(lesson, {}, { state }: Request) {
-                const attendance = await lessonsServices.getLessonAttendance(lesson._id, state)
-                return attendance
-            },
-        },
+        // attendance: {
+        //     type: new GraphQLList(LessonAttendeeModel),
+        //     async resolve(lesson, {}, { state }: Request) {
+        //         const attendance = await lessonsServices.getLessonAttendance(lesson._id, state)
+        //         return attendance
+        //     },
+        // },
         outcomes: {
             type: new GraphQLList(LessonOutcomeModel),
         },

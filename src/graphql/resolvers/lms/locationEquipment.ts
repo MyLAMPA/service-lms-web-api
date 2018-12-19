@@ -13,7 +13,7 @@ import {
     SchoolMembershipRole,
 } from '../../../types/user'
 import { LocationEquipment } from '../../types'
-import * as locationsEquipmentsServices from '../../../services/locationsEquipments'
+import * as locationEquipmentsServices from '../../../services/lms/locationEquipments'
 
 export const locationEquipment = {
     type: LocationEquipment.Model,
@@ -30,7 +30,7 @@ export const locationEquipment = {
         }
 
         if (!_.isNil(id)) {
-            const locationEquipment = await locationsEquipmentsServices.getLocationEquipmentById(id, state)
+            const locationEquipment = await locationEquipmentsServices.getLocationEquipmentById(id, state)
             return locationEquipment
         }
         return null
@@ -51,7 +51,7 @@ export const locationEquipments = {
                 return []
         }
 
-        const locationEquipments = await locationsEquipmentsServices.getLocationsEquipments(searchParams, state)
+        const locationEquipments = await locationEquipmentsServices.getLocationsEquipments(searchParams, state)
         return locationEquipments
     },
 }

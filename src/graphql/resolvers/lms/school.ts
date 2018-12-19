@@ -10,7 +10,7 @@ import { School } from '../../types'
 import {
     LMSCtx,
 } from '../../../types/lms'
-import * as schoolsServices from '../../../services/schools'
+import * as schoolsServices from '../../../services/lms/schools'
 
 export const school = {
     type: School.Model,

@@ -7,7 +7,7 @@ import {
 import * as _ from 'lodash'
 
 import { Model as SchoolMembershipModel } from '../../types/user/schoolMembership'
-import * as schoolMembershipsServices from '../../../services/schoolMemberships'
+import * as schoolMembershipsServices from '../../../services/user/schoolMemberships'
 
 export const schoolMemberships = {
     type: new GraphQLList(SchoolMembershipModel),

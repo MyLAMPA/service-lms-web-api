@@ -11,7 +11,7 @@ import {
 import * as _ from 'lodash'
 
 import { Model as LocationEquipmentModel } from './locationEquipment'
-import * as locationEquipmentsServices from '../../services/locationsEquipments'
+import * as locationEquipmentsServices from '../../services/lms/locationEquipments'
 
 export const Model = new GraphQLObjectType({
     name: 'Location',

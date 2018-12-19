@@ -13,7 +13,7 @@ import {
     LMSCtx,
 } from '../../../types/lms'
 import { Course } from '../../types'
-import * as coursesServices from '../../../services/courses'
+import * as coursesServices from '../../../services/lms/courses'
 
 export const course = {
     type: Course.Model,

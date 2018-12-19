@@ -13,7 +13,7 @@ import {
     LMSCtx,
 } from '../../../types/lms'
 import { Group } from '../../types'
-import * as groupsServices from '../../../services/groups'
+import * as groupsServices from '../../../services/lms/groups'
 
 export const group = {
     type: Group.Model,

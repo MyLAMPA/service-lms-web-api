@@ -12,7 +12,7 @@ import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import { LessonStatusEnum } from './enums'
-import * as lessonsServices from '../../services/lessons'
+import * as lessonsServices from '../../services/lms/lessons'
 
 export const DueLessonModel = new GraphQLObjectType({
     name: 'DueLesson',
