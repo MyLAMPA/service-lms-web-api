@@ -4,16 +4,16 @@ import * as _ from 'lodash'
 import { httpErrors as errors } from '../../errors'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     LMSCtx,
 } from '../../types/lms'
-import * as schoolMembershipsServices from '../schoolMemberships'
+import * as schoolMembershipsServices from '../identity/schoolMemberships'
 
 export async function resolveContext(schoolMembershipId: string, state: State): Promise<LMSCtx> {
     const schoolMembership = await schoolMembershipsServices.getSchoolMembershipById(schoolMembershipId, state)
 
-    if (String(schoolMembership.user) !== String(state.user._id)) {
+    if (String(schoolMembership.user) !== String(state.idCtx.userId)) {
         throw errors.unauthorized('Forbidden SchoolMembership')
     }
 

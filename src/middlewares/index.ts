@@ -12,14 +12,9 @@ import * as _ from 'lodash'
 import { config } from '../config'
 import { httpErrors as errors, authErrors } from '../errors'
 import {
-    TokenBody,
-    UserRole,
-    CRUD,
-} from '../models'
+    IDCtx,
+} from '../types/identity'
 import { logger } from '../components/logger'
-import * as accessesServices from '../services/accesses'
-import * as usersServices from '../services/users'
-import * as schoolsServices from '../services/schools'
 
 export const authorizeRequest = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -37,16 +32,9 @@ export const authorizeRequest = async (req: Request, res: Response, next: NextFu
 
         const credentials: string = authorizationHeader.split(' ')[1]
 
-        const { accessId, activeRole } = <TokenBody>jwt.verify(credentials, config.auth.jwtSecret)
+        const { accessId, userId } = <IDCtx>jwt.verify(credentials, config.auth.jwtSecret)
 
-        const access = await accessesServices.getAccessById(accessId, req.state)
-        const user = await usersServices.getUserByAccessId(access._id, req.state)
-        const school = await schoolsServices.getSchoolById(<string>user.school, false, req.state)
-
-        req.state.activeRole = activeRole
-        req.state.access = access
-        req.state.user = user
-        req.state.school = school
+        req.state.idCtx = { accessId, userId }
 
         return next()
     } catch (err) {
@@ -54,22 +42,6 @@ export const authorizeRequest = async (req: Request, res: Response, next: NextFu
         return next(errors.unauthorized('Request Authorization Failed'))
     }
 }
-
-export const limitToRole = (requiredRole: UserRole|UserRole[]) =>
-    async (req: Request, res: Response, next: NextFunction) => {
-        const activeRole = req.state.activeRole
-        if (_.isArray(requiredRole) && requiredRole.indexOf(activeRole) >= 0) {
-            next()
-        } else if (activeRole === requiredRole) {
-            next()
-        }
-
-        req.state.logger.warn({
-            requiredRole, activeRole,
-            access: _.pick(req.state.access, ['_id', 'username']),
-            user: _.pick(req.state.user, ['_id', 'access', 'roles']),
-        }, 'Request To Access Forbbiden Content')
-    }
 
 export const handleController =
     (controller: (req?: Request, res?: Response) => any, useStandardHandler: boolean = true) =>

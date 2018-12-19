@@ -3,10 +3,6 @@ import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import { httpErrors as errors } from '../../errors'
-import {
-    State,
-    LessonPlanTemplate,
-} from '../../models'
 
 // export async function getLessonPlanTemplates(params: object, state: State): Promise<LessonPlanTemplate[]> {
 //     const lessonPlanTemplates = await db.lessonPlanTemplates.find(params).populate('createdBy').sort({ createdAt: -1 }).lean()

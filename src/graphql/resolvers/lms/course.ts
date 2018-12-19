@@ -8,15 +8,15 @@ import * as _ from 'lodash'
 
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
+} from '../../../types/identity'
 import {
     LMSCtx,
 } from '../../../types/lms'
-import { Course } from '../../types'
+import { Model as CourseModel } from '../../types/lms/course'
 import * as coursesServices from '../../../services/lms/courses'
 
 export const course = {
-    type: Course.Model,
+    type: CourseModel,
     args: {
         id: {
             type: GraphQLString,
@@ -36,7 +36,7 @@ export const course = {
 }
 
 export const courses = {
-    type: new GraphQLList(Course.Model),
+    type: new GraphQLList(CourseModel),
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const searchParams: any = {

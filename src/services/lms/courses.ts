@@ -5,8 +5,10 @@ import * as moment from 'moment'
 import { httpErrors as errors } from '../../errors'
 import {
     State,
+} from '../../types'
+import {
     Course,
-} from '../../models'
+} from '../../types/lms'
 import { coursesRepository } from '../../repositories'
 
 export async function getCourses(params: object, state: State): Promise<Course[]> {
@@ -26,7 +28,7 @@ export async function createCourse(course: Course, state: State): Promise<Course
     const document = _.merge(
         {},
         _.pick(course, ['name', 'abbr', 'description', 'color']),
-        { school: state.school._id }
+        { school: state.lmsCtx.schoolId }
     )
     return await coursesRepository.createCourse(document, state)
 }

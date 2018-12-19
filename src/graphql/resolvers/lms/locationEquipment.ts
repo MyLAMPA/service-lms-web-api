@@ -11,12 +11,12 @@ import {
 } from '../../../types/lms'
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
-import { LocationEquipment } from '../../types'
+} from '../../../types/identity'
+import { Model as LocationEquipmentModel } from '../../types/lms/locationEquipment'
 import * as locationEquipmentsServices from '../../../services/lms/locationEquipments'
 
 export const locationEquipment = {
-    type: LocationEquipment.Model,
+    type: LocationEquipmentModel,
     args: {
         id: {
             type: GraphQLString,
@@ -38,7 +38,7 @@ export const locationEquipment = {
 }
 
 export const locationEquipments = {
-    type: new GraphQLList(LocationEquipment.Model),
+    type: new GraphQLList(LocationEquipmentModel),
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const searchParams: any = {

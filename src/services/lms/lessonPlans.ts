@@ -4,18 +4,6 @@ import * as moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 
 import { httpErrors as errors, httpErrors } from '../../errors'
-import {
-    State,
-    Lesson,
-    LessonStatus,
-    LessonAttendance,
-    LessonTeachersNote,
-    BaseLessonTeachersNote,
-    BaseLessonPlan,
-    BaseLessonOutcome,
-    LessonOutcome,
-    BaseOutcome,
-} from '../../models'
 // import * as db from '../repositories/mongo'
 // import * as lessonsServices from './lessons'
 // import * as outcomesServices from './outcomes'

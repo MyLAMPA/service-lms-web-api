@@ -11,12 +11,12 @@ import {
 } from '../../../types/lms'
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
-import { SchoolYear } from '../../types'
+} from '../../../types/identity'
+import { Model as SchoolYearModel } from '../../types/lms/schoolYear'
 import * as schoolYearsServices from '../../../services/lms/schoolYears'
 
 export const schoolYears = {
-    type: new GraphQLList(SchoolYear.Model),
+    type: new GraphQLList(SchoolYearModel),
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const searchParams: any = {

@@ -25,9 +25,9 @@ router
     .route('*')
     .options(async function (req: Request, res: Response, next: NextFunction) {
         try {
-            res.json({ status: 'ok' })
-        } catch (ex) {
-            next(ex)
+            return res.json({ status: 'ok' })
+        } catch (err) {
+            return next(err)
         }
     })
 
@@ -41,9 +41,9 @@ router
             if (req.state.out === undefined) {
                 throw errors.notFound()
             }
-            next()
-        } catch (ex) {
-            next(ex)
+            return next()
+        } catch (err) {
+            return next(err)
         }
     })
 

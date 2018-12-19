@@ -1,5 +1,5 @@
 
-import { SchoolMembershipRole } from './user'
+import { SchoolMembershipRole } from './identity'
 
 export type LMSCtx = {
     role: SchoolMembershipRole
@@ -67,6 +67,27 @@ export type LocationEquipment = {
     school: string // string|School
     title: string
     description: string
+}
+
+export type Course = {
+    _id?: string
+    school: string // string|School
+    name: string
+    abbr: string
+    description: string
+    color: string
+}
+
+export type Group = {
+    _id?: string;
+    school: string // string|School
+    course: string // string|Course
+    name: string
+    abbr: string
+    description: string
+    capacity: number
+    students: string[] // string[]|Student[]
+    color: string
 }
 
 export type Homework = {

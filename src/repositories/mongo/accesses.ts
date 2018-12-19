@@ -3,10 +3,12 @@ import * as _ from 'lodash'
 
 import { config } from '../../config'
 import {
-    Partial,
     State,
+    Partial,
+} from '../../types'
+import {
     Access,
-} from '../../models'
+} from '../../types/identity'
 import { source } from './source'
 import { accessSchema, AccessName } from './schemas/access'
 

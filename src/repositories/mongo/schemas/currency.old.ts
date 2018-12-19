@@ -1,8 +1,8 @@
 
-import { Schema, SchemaTypes } from 'mongoose'
+// import { Schema, SchemaTypes } from 'mongoose'
 
-const currencySchema = new Schema({
+// const currencySchema = new Schema({
     
-})
+// })
 
-export { currencySchema }
+// export { currencySchema }

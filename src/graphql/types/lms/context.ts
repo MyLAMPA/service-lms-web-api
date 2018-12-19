@@ -20,7 +20,7 @@ import { locationEquipment, locationEquipments } from '../../resolvers/lms/locat
 import { student, students } from '../../resolvers/lms/student'
 import { teacher, teachers } from '../../resolvers/lms/teacher'
 
-import { Model as SchoolModel } from '../school'
+import { Model as SchoolModel } from './school'
 // import * as messagesServices from '../../../services/chat/messages'
 // import * as chatContextServices from '../../../services/chat/context'
 

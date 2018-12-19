@@ -4,10 +4,10 @@ import * as _ from 'lodash'
 import { config } from '../../config'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     SchoolMembership,
-} from '../../types/user'
+} from '../../types/identity'
 import { source } from './source'
 import { schoolMembershipSchema, SchoolMembershipName } from './schemas/schoolMembership'
 

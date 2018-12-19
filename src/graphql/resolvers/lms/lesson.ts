@@ -12,12 +12,12 @@ import {
 } from '../../../types/lms'
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
-import { Lesson } from '../../types'
+} from '../../../types/identity'
+import { Model as LessonModel } from '../../types/lms/lesson'
 import * as lessonsServices from '../../../services/lms/lessons'
 
 export const lesson = {
-    type: Lesson.Model,
+    type: LessonModel,
     args: {
         id: {
             type: GraphQLString,
@@ -33,7 +33,7 @@ export const lesson = {
 }
 
 export const lessons = {
-    type: new GraphQLList(Lesson.Model),
+    type: new GraphQLList(LessonModel),
     args: {
         dateFrom: {
             type: GraphQLString,

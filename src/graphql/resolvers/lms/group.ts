@@ -8,15 +8,15 @@ import * as _ from 'lodash'
 
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
+} from '../../../types/identity'
 import {
     LMSCtx,
 } from '../../../types/lms'
-import { Group } from '../../types'
+import { Model as GroupModel } from '../../types/lms/group'
 import * as groupsServices from '../../../services/lms/groups'
 
 export const group = {
-    type: Group.Model,
+    type: GroupModel,
     args: {
         id: {
             type: GraphQLString,
@@ -32,7 +32,7 @@ export const group = {
 }
 
 export const groups = {
-    type: new GraphQLList(Group.Model),
+    type: new GraphQLList(GroupModel),
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const searchParams: any = {

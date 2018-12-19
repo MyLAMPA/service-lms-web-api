@@ -4,13 +4,16 @@ import * as _ from 'lodash'
 
 import {
     State,
-    BaseOutcome,
-    Outcome,
-} from '../../models'
+} from '../../types'
+import {
+//     BaseOutcome,
+//     Outcome,
+} from '../../types/lms'
 
-export async function prepareForSave(outcome: BaseOutcome, state: State): Promise<BaseOutcome>
-export async function prepareForSave(outcome: Outcome, state: State): Promise<Outcome>
-export async function prepareForSave(outcome: BaseOutcome|Outcome, state: State): Promise<BaseOutcome|Outcome> {
+// export async function prepareForSave(outcome: BaseOutcome, state: State): Promise<BaseOutcome>
+// export async function prepareForSave(outcome: Outcome, state: State): Promise<Outcome>
+// export async function prepareForSave(outcome: BaseOutcome|Outcome, state: State): Promise<BaseOutcome|Outcome> {
+export async function prepareForSave(outcome: any, state: State): Promise<any> {
     if (
         !/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(outcome.key) &&
         !/^\{?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}‌​\}?$/.test(outcome.key)

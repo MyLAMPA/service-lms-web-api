@@ -3,11 +3,6 @@ import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import { httpErrors as errors } from '../../errors'
-import {
-    State,
-    LessonActivity,
-    LessonActivityCategory,
-} from '../../models'
 // import * as db from '../repositories/mongo'
 
 // export async function getLessonActivities(params: object, state: State): Promise<LessonActivity[]> {

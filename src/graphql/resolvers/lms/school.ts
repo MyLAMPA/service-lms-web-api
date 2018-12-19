@@ -6,14 +6,14 @@ import {
 } from 'graphql'
 import * as _ from 'lodash'
 
-import { School } from '../../types'
 import {
     LMSCtx,
 } from '../../../types/lms'
+import { Model as SchoolModel } from '../../types/lms/school'
 import * as schoolsServices from '../../../services/lms/schools'
 
 export const school = {
-    type: School.Model,
+    type: SchoolModel,
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const school = await schoolsServices.getSchoolById(lmsCtx.schoolId, true, state)

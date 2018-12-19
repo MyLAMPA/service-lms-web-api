@@ -4,8 +4,10 @@ import * as _ from 'lodash'
 import { config } from '../../config'
 import {
     State,
+} from '../../types'
+import {
     Group,
-} from '../../models'
+} from '../../types/lms'
 import { source } from './source'
 import { groupSchema, GroupName } from './schemas/group'
 

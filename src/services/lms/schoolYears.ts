@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import { httpErrors as errors } from '../../errors'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     SchoolYear,
 } from '../../types/lms'

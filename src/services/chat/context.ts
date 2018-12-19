@@ -4,7 +4,7 @@ import * as momnet from 'moment'
 
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     Room,
 } from '../../types/chat'

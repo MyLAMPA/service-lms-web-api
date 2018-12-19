@@ -5,8 +5,10 @@ import * as moment from 'moment'
 import { httpErrors as errors } from '../../errors'
 import {
     State,
+} from '../../types'
+import {
     Group,
-} from '../../models'
+} from '../../types/lms'
 import { groupsRepository } from '../../repositories'
 
 export async function getGroupsWithCourse(params: object, state: State) {
@@ -31,7 +33,7 @@ export async function createGroup(group: Group, state: State): Promise<Group> {
     const document = _.merge(
         {},
         _.pick(group, ['course', 'name', 'abbr', 'description', 'capacity', 'students', 'color']),
-        { school: state.school._id }
+        { school: state.lmsCtx.schoolId }
     )
     const createdGroup = await groupsRepository.createGroup(document, state)
     return createdGroup

@@ -3,7 +3,7 @@ import { Schema, SchemaTypes } from 'mongoose'
 
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
+} from '../../../types/identity'
 import { SchoolName } from './school'
 import { UserName } from './user'
 import { StudentName } from './student'

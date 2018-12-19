@@ -4,16 +4,14 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { user } from './user'
+import { identity } from './identity'
 import { lms } from './lms'
 import { chat } from './chat'
-import { myProfile } from './myProfile'
 
 const query = new GraphQLObjectType({
     name: 'Query',
     fields: {
-        // myProfile,
-        user,
+        identity,
         lms,
         chat,
     },

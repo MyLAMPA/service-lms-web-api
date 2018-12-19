@@ -5,7 +5,7 @@ import * as moment from 'moment'
 import { httpErrors as errors } from '../../errors'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     Lesson,
     LessonStatus,

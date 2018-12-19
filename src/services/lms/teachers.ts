@@ -5,16 +5,16 @@ import * as moment from 'moment'
 import { httpErrors as errors } from '../../errors'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     Teacher,
 } from '../../types/lms'
 import {
     SchoolMembershipRole,
-} from '../../types/user'
+} from '../../types/identity'
 import { teachersRepository } from '../../repositories'
-import * as usersServices from '../user/users'
-import * as schoolMembershipsServices from '../user/schoolMemberships'
+import * as usersServices from '../identity/users'
+import * as schoolMembershipsServices from '../identity/schoolMemberships'
 
 export async function getTeachers(params: object, state: State): Promise<Teacher[]> {
     const teachers = await teachersRepository.getTeachers(params, state)

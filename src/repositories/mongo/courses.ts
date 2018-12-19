@@ -4,8 +4,10 @@ import * as _ from 'lodash'
 import { config } from '../../config'
 import {
     State,
+} from '../../types'
+import {
     Course,
-} from '../../models'
+} from '../../types/lms'
 import { source } from './source'
 import { courseSchema, CourseName } from './schemas/course'
 

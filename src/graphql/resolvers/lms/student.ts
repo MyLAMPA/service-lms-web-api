@@ -11,12 +11,12 @@ import {
 } from '../../../types/lms'
 import {
     SchoolMembershipRole,
-} from '../../../types/user'
-import { Student } from '../../types'
+} from '../../../types/identity'
+import { Model as StudentModel } from '../../types/lms/student'
 import * as studentsServices from '../../../services/lms/students'
 
 export const student = {
-    type: Student.Model,
+    type: StudentModel,
     args: {
         id: {
             type: GraphQLString,
@@ -38,7 +38,7 @@ export const student = {
 }
 
 export const students = {
-    type: new GraphQLList(Student.Model),
+    type: new GraphQLList(StudentModel),
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const searchParams: any = {

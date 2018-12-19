@@ -5,7 +5,7 @@ import * as moment from 'moment'
 import { config } from '../../config'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     Homework,
 } from '../../types/lms'

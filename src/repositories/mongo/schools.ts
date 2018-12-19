@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 import { config } from '../../config'
 import {
     State,
-} from '../../models'
+} from '../../types'
 import {
     School,
 } from '../../types/lms'
