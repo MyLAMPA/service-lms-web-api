@@ -33,3 +33,18 @@ export const SchoolMembershipRoleEnum = new GraphQLEnumType({
         },
     },
 })
+
+export const SubscriptionStatusEnum = new GraphQLEnumType({
+    name: 'SubscriptionStatusEnum',
+    values: {
+        pending: {
+            value: 'pending',
+        },
+        active: {
+            value: 'active',
+        },
+        canceled: {
+            value: 'canceled',
+        },
+    },
+})

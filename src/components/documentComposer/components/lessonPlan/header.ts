@@ -3,7 +3,7 @@ import * as moment from 'moment'
 
 import {
     Lesson,
-} from '../../../../types/lms'
+} from '../../../../types'
 import { LampaLogo } from '../lampaLogo'
 
 export interface LessonPlanHeaderProps {}

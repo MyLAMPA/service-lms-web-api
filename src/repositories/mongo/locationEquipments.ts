@@ -4,10 +4,8 @@ import * as _ from 'lodash'
 import { config } from '../../config'
 import {
     State,
-} from '../../types'
-import {
     LocationEquipment,
-} from '../../types/lms'
+} from '../../types'
 import { source } from './source'
 import { locationEquipmentSchema, LocationEquipmentName } from './schemas/locationEquipment'
 

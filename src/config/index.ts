@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import * as _ from 'lodash'
 
 import { Config } from './index.d'
+import { envConfig } from './envConfig'
 
 const defaultConfig: Config = {
     environment: _.isString(process.env.NODE_ENV) ? process.env.NODE_ENV : 'dev',
@@ -24,13 +25,35 @@ const defaultConfig: Config = {
         sendErrorStackTrace: true,
     },
     auth: {
+        accessTokenSecret: 'notSet',
+        refreshTokenSecret: 'notSet',
+        accessTokenExpirationMinutes: 60 * 60 * 24 * 7, // 7 days
+        refreshTokenExpirationMinutes: 60 * 60 * 24 * 365, // 1 year
         jwtSecret: 'abc123',
         hashSaltRounds: 12,
+    },
+    aws: {
+        accessKeyId: 'notSet',
+        secretAccessKey: 'notSet',
+        region: 'eu-central-1',
+        dynamodb: {
+            tableNamePrefix: 'notSet',
+        },
     },
     mongoose: {
         uri: 'mongodb://127.0.0.1:27017',
         db: 'lampa',
         tablePrefix: '',
+    },
+    subscriptionManagementService: {
+        baseUrl: 'notSet',
+        accessKeyId: 'notSet',
+        secretAccessKey: 'notSet',
+    },
+    identityService: {
+        baseUrl: 'notSet',
+        accessKeyId: 'notSet',
+        secretAccessKey: 'notSet',
     },
     smtp: {
         host: '',
@@ -43,12 +66,12 @@ const defaultConfig: Config = {
     },
 }
 
-let environmentConfig = { }
+let environmentConfig = {}
 const environmentConfigPath = path.resolve(__dirname, `./env/${defaultConfig.configEnv}.js`)
 if (fs.existsSync(environmentConfigPath)) {
-    environmentConfig = require(environmentConfigPath)
+    environmentConfig = require(environmentConfigPath).default
 }
 
-const config: Config = _.merge(defaultConfig, environmentConfig)
+const config: Config = _.merge(defaultConfig, environmentConfig, envConfig)
 
 export { config }

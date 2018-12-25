@@ -5,10 +5,8 @@ import * as moment from 'moment'
 import { config } from '../../config'
 import {
     State,
-} from '../../types'
-import {
     Homework,
-} from '../../types/lms'
+} from '../../types'
 import { source } from './source'
 import { homeworkSchema, HomeworkName } from './schemas/homework'
 

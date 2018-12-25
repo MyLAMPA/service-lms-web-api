@@ -1,13 +1,15 @@
 
 import { Schema, SchemaTypes } from 'mongoose'
 
-import { SchoolStatus } from '../../../types/lms'
+import {
+    SchoolStatus,
+} from '../../../types'
 import { SchoolYearName } from './schoolYear'
 
 export const SchoolName = 'School'
 
 const schoolStatusEnum = [
-    SchoolStatus.freeTrial, SchoolStatus.active,
+    SchoolStatus.freetrial, SchoolStatus.active,
     SchoolStatus.suspended, SchoolStatus.archived,
 ]
 

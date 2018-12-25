@@ -13,7 +13,7 @@ import * as _ from 'lodash'
 import * as moment from 'moment'
 
 import { Model as SchoolYearModel } from './schoolYear'
-import * as schoolYearsServices from '../../../services/lms/schoolYears'
+import * as schoolYearsServices from '../../../services/schoolYears'
 
 export const TimeTableSettingsModel = new GraphQLObjectType({
     name: 'TimetableSettings',

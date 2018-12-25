@@ -11,8 +11,8 @@ import {
 import * as _ from 'lodash'
 
 import { SchoolMembershipRoleEnum } from '../enums'
-import { Model as SchoolModel } from '../school'
-import * as schoolsServices from '../../../services/lms/schools'
+import { Model as SchoolModel } from '../lms/school'
+import * as schoolsServices from '../../../services/schools'
 
 export const Model = new GraphQLObjectType({
     name: 'SchoolMembership',

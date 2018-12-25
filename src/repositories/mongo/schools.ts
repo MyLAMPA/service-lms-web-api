@@ -4,10 +4,9 @@ import * as _ from 'lodash'
 import { config } from '../../config'
 import {
     State,
-} from '../../types'
-import {
     School,
-} from '../../types/lms'
+    SchoolStatus,
+} from '../../types'
 import { source } from './source'
 import { schoolSchema, SchoolName } from './schemas/school'
 
@@ -23,4 +22,8 @@ export async function getSchoolById(schoolId: string, state: State): Promise<Sch
         return school
     }
     return null
+}
+
+export async function updateSchoolStatus(schoolId: string, status: SchoolStatus, state: State): Promise<void> {
+    await schoolsCollection.findByIdAndUpdate(schoolId, { $set: { status } })
 }

@@ -8,9 +8,9 @@ import * as _ from 'lodash'
 
 import {
     IDCtx,
-} from '../../../types/identity'
+} from '../../../types'
 import { Model as UserModel } from '../../types/identity/user'
-import * as usersServices from '../../../services/identity/users'
+import * as usersServices from '../../../services/users'
 
 export const user = {
     type: UserModel,

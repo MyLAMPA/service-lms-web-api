@@ -1,45 +1,44 @@
 
+import { v4 as uuidv4 } from 'uuid'
+import * as jwt from 'jsonwebtoken'
 import {
     Request,
     Response,
     NextFunction,
 } from 'express'
-import { v4 as uuidv4 } from 'uuid'
-import * as jwt from 'jsonwebtoken'
-import * as joi from 'joi'
 import * as _ from 'lodash'
+import * as joi from 'joi'
 
 import { config } from '../config'
 import { httpErrors as errors, authErrors } from '../errors'
 import {
     IDCtx,
-} from '../types/identity'
+} from '../types'
 import { logger } from '../components/logger'
 
-export const authorizeRequest = async (req: Request, res: Response, next: NextFunction) => {
+export const authorizeUserRequest = async (req: Request, res: Response, next: NextFunction) => {
     try {
         let authorizationHeader: string = null
         if (_.has(req.headers, 'authorization')) {
             authorizationHeader = <string>_.get(req.headers, 'authorization')
         }
 
-        // if (
-        //     authorizationHeader.split(' ')[0] !== 'Bearer' ||
-        //     !_.isString(authorizationHeader.split(' ')[1])
-        // ) {
-        //     throw authErrors.unknownAuthorizationHeader()
-        // }
+        if (
+            authorizationHeader.split(' ')[0] !== 'Bearer' ||
+            !_.isString(authorizationHeader.split(' ')[1])
+        ) {
+            throw authErrors.unknownAuthorizationHeader()
+        }
 
         const credentials: string = authorizationHeader.split(' ')[1]
+        const { userId } = await <IDCtx>jwt.verify(credentials, config.auth.accessTokenSecret)
 
-        const { accessId, userId } = <IDCtx>jwt.verify(credentials, config.auth.jwtSecret)
-
-        req.state.idCtx = { accessId, userId }
+        req.state.idCtx = { userId }
 
         return next()
     } catch (err) {
         req.state.logger.warn({ err }, 'Request Authorization Failed')
-        return next(errors.unauthorized('Request Authorization Failed'))
+        return next(errors.unauthorized('Invalid Credentials'))
     }
 }
 

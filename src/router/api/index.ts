@@ -1,11 +1,10 @@
 
 import { Router } from 'express'
 
-import { authorizeRequest } from '../../middlewares'
-import { router as schoolRouter } from './school'
+import { router as schoolsRouter } from './schools'
 
 const router = Router()
 
-router.use('/school', authorizeRequest, schoolRouter)
+router.use('/schools', schoolsRouter)
 
 export { router }

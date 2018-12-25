@@ -12,8 +12,8 @@ import * as _ from 'lodash'
 
 import { Model as CourseModel } from './course'
 import { Model as StudentModel } from './student'
-import * as coursesServices from '../../../services/lms/courses'
-import * as studentsServices from '../../../services/lms/students'
+import * as coursesServices from '../../../services/courses'
+import * as studentsServices from '../../../services/students'
 
 export const Model = new GraphQLObjectType({
     name: 'Group',

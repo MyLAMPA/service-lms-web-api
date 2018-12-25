@@ -10,6 +10,7 @@ import {
 } from 'graphql'
 import * as _ from 'lodash'
 
+import { subscriptions } from '../../resolvers/lms/subscriptions'
 import { school } from '../../resolvers/lms/school'
 import { schoolYears } from '../../resolvers/lms/schoolYears'
 import { course, courses } from '../../resolvers/lms/course'
@@ -27,6 +28,7 @@ import { Model as SchoolModel } from './school'
 export const Context = new GraphQLObjectType({
     name: 'LMSContext',
     fields: {
+        subscriptions,
         school,
         schoolYears,
         course, courses,

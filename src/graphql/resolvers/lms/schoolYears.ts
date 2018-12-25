@@ -8,12 +8,10 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-} from '../../../types/lms'
-import {
     SchoolMembershipRole,
-} from '../../../types/identity'
+} from '../../../types'
 import { Model as SchoolYearModel } from '../../types/lms/schoolYear'
-import * as schoolYearsServices from '../../../services/lms/schoolYears'
+import * as schoolYearsServices from '../../../services/schoolYears'
 
 export const schoolYears = {
     type: new GraphQLList(SchoolYearModel),

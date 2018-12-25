@@ -8,12 +8,10 @@ import * as _ from 'lodash'
 
 import {
     SchoolMembershipRole,
-} from '../../../types/identity'
-import {
     LMSCtx,
-} from '../../../types/lms'
+} from '../../../types'
 import { Model as GroupModel } from '../../types/lms/group'
-import * as groupsServices from '../../../services/lms/groups'
+import * as groupsServices from '../../../services/groups'
 
 export const group = {
     type: GroupModel,

@@ -8,9 +8,9 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-} from '../../../types/lms'
+} from '../../../types'
 import { Model as SchoolModel } from '../../types/lms/school'
-import * as schoolsServices from '../../../services/lms/schools'
+import * as schoolsServices from '../../../services/schools'
 
 export const school = {
     type: SchoolModel,

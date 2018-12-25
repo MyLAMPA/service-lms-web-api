@@ -3,9 +3,8 @@ import { Schema, SchemaTypes } from 'mongoose'
 
 import {
     SchoolMembershipRole,
-} from '../../../types/identity'
+} from '../../../types'
 import { SchoolName } from './school'
-import { UserName } from './user'
 import { StudentName } from './student'
 import { TeacherName } from './teacher'
 
@@ -19,7 +18,7 @@ const schoolMembershipRoleEnum = [
 
 const schoolMembershipSchema = new Schema({
     isActive: { type: SchemaTypes.Boolean, default: true },
-    user:     { type: SchemaTypes.ObjectId, ref: UserName, required: true },
+    user:     { type: SchemaTypes.Number, required: true },
     school:   { type: SchemaTypes.ObjectId, ref: SchoolName, required: true },
     role:     { type: SchemaTypes.String, enum: schoolMembershipRoleEnum, required: true },
     student:  { type: SchemaTypes.ObjectId, ref: StudentName, default: null },

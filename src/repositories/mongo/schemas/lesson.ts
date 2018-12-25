@@ -4,7 +4,7 @@ import { Schema, SchemaTypes } from 'mongoose'
 import {
     LessonStatus,
     AttendanceStatus,
-} from '../../../types/lms'
+} from '../../../types'
 import { SchoolName } from './school'
 import { GroupName } from './group'
 import { CourseName } from './course'

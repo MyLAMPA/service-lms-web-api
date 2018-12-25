@@ -9,12 +9,10 @@ import * as moment from 'moment'
 
 import {
     LMSCtx,
-} from '../../../types/lms'
-import {
     SchoolMembershipRole,
-} from '../../../types/identity'
+} from '../../../types'
 import { Model as LessonModel } from '../../types/lms/lesson'
-import * as lessonsServices from '../../../services/lms/lessons'
+import * as lessonsServices from '../../../services/lessons'
 
 export const lesson = {
     type: LessonModel,

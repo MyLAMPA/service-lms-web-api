@@ -8,12 +8,10 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-} from '../../../types/lms'
-import {
     SchoolMembershipRole,
-} from '../../../types/identity'
+} from '../../../types'
 import { Model as StudentModel } from '../../types/lms/student'
-import * as studentsServices from '../../../services/lms/students'
+import * as studentsServices from '../../../services/students'
 
 export const student = {
     type: StudentModel,
