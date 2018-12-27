@@ -43,6 +43,10 @@ export type AuthConfig = {
     refreshTokenSecret: string
     accessTokenExpirationMinutes: number
     refreshTokenExpirationMinutes: number
+    accessKey: {
+        id: string
+        secret: string
+    }
     jwtSecret: string
     hashSaltRounds: number
 }

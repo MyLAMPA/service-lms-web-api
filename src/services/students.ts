@@ -6,11 +6,11 @@ import { httpErrors as errors } from '../errors'
 import {
     State,
     Student,
-    SchoolMembershipRole,
+    ContextMembershipRole,
 } from '../types'
 import { studentsRepository } from '../repositories'
 import * as usersServices from './users'
-import * as schoolMembershipsServices from './schoolMemberships'
+import * as contextMembershipsServices from './contextMemberships'
 
 export async function getStudents(params: object, state: State): Promise<Student[]> {
     const students = await studentsRepository.getStudents(params, state)
@@ -30,10 +30,10 @@ export async function createStudent(student: Student, email: string, state: Stat
 
     if (email) {
         const user = await usersServices.getOrCreateUserByEmail(email, state)
-        await schoolMembershipsServices.createSchoolMembership({
-            school: state.lmsCtx.schoolId,
-            role: SchoolMembershipRole.student,
-            user: user.id,
+        await contextMembershipsServices.createSchoolMembership({
+            context: state.lmsCtx.contextId,
+            role: ContextMembershipRole.student,
+            userId: user.id,
             teacher: null,
             student: createdStudent._id,
         }, state)

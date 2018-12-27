@@ -5,8 +5,8 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { Context } from '../../../types/lms/context'
-import * as lmsContextServices from '../../../../services/lmsContext'
+import { LMSContext } from '../../../types/lms/context'
+import * as contextServices from '../../../../services/context'
 // import * as schoolMembershipsServices from '../../../../services/lms/schoolMemberships'
 
 /*import { school } from '../../../resolvers/lms/school'
@@ -35,14 +35,14 @@ const LMS = new GraphQLObjectType({
 })*/
 
 const lms = {
-    type: Context,
+    type: LMSContext,
     args: {
         membership: {
             type: GraphQLString,
         },
     },
     async resolve(source, { membership: membershipId }, { state }: Request) {
-        state.lmsCtx = await lmsContextServices.resolveContext(membershipId, state)
+        state.lmsCtx = await contextServices.resolveContext(membershipId, state)
         return state.lmsCtx
     },
 }

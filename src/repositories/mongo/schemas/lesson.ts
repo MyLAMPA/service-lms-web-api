@@ -5,7 +5,7 @@ import {
     LessonStatus,
     AttendanceStatus,
 } from '../../../types'
-import { SchoolName } from './school'
+import { ContextName } from './context'
 import { GroupName } from './group'
 import { CourseName } from './course'
 import { LocationName } from './location'
@@ -15,7 +15,7 @@ import { StudentName } from './student'
 export const LessonName = 'Lesson'
 
 const lessonSchema = new Schema({
-    school:         { type: SchemaTypes.ObjectId, ref: SchoolName, default: null },
+    context:        { type: SchemaTypes.ObjectId, ref: ContextName, default: null },
     group:          { type: SchemaTypes.ObjectId, ref: GroupName, default: null },
     course:         { type: SchemaTypes.ObjectId, ref: CourseName, default: null },
     location:       { type: SchemaTypes.ObjectId, ref: LocationName, default: null },

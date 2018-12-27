@@ -31,7 +31,7 @@ export async function createGroup(group: Group, state: State): Promise<Group> {
     const document = _.merge(
         {},
         _.pick(group, ['course', 'name', 'abbr', 'description', 'capacity', 'students', 'color']),
-        { school: state.lmsCtx.schoolId }
+        { context: state.lmsCtx.contextId }
     )
     const createdGroup = await groupsRepository.createGroup(document, state)
     return createdGroup

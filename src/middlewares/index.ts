@@ -16,6 +16,27 @@ import {
 } from '../types'
 import { logger } from '../components/logger'
 
+const { accessKey } = config.auth
+
+export const authorizeRequest = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const accessKeyId: string = _.has(req.headers, 'x-access-key-id') ?
+            <string>_.get(req.headers, 'x-access-key-id') : null
+        
+        const accessKeySecret: string = _.has(req.headers, 'x-secret-access-key') ?
+            <string>_.get(req.headers, 'x-secret-access-key') : null
+
+        if (accessKeyId === accessKey.id && accessKeySecret === accessKey.secret) {
+            return next()
+        }
+
+        throw errors.unauthorized('Invalid Access Key')
+    } catch (err) {
+        req.state.logger.warn({ err }, 'Request Authorization Failed')
+        return next(errors.unauthorized('Request Authorization Failed'))
+    }
+}
+
 export const authorizeUserRequest = async (req: Request, res: Response, next: NextFunction) => {
     try {
         let authorizationHeader: string = null

@@ -7,8 +7,8 @@ import {
 import * as _ from 'lodash'
 
 import {
-    SchoolMembershipRole,
     LMSCtx,
+    ContextMembershipRole,
 } from '../../../types'
 import { Model as CourseModel } from '../../types/lms/course'
 import * as coursesServices from '../../../services/courses'
@@ -20,11 +20,11 @@ export const course = {
             type: GraphQLString,
         },
     },
-    async resolve(lmsCtx: LMSCtx, { id }, { state }: Request) {
+    async resolve({ role }: LMSCtx, { id }, { state }: Request) {
         if (!_.isNil(id)) {
-            switch (lmsCtx.role) {
-                case SchoolMembershipRole.admin:
-                case SchoolMembershipRole.teacher:
+            switch (role) {
+                case ContextMembershipRole.admin:
+                case ContextMembershipRole.teacher:
                     const course = await coursesServices.getCourseById(id, state)
                     return course
             }
@@ -36,12 +36,10 @@ export const course = {
 export const courses = {
     type: new GraphQLList(CourseModel),
     args: {},
-    async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
-        const searchParams: any = {
-            school: lmsCtx.schoolId,
-        }
+    async resolve({ role, contextId: context }: LMSCtx, {}, { state }: Request) {
+        const searchParams: any = { context }
 
-        if (lmsCtx.role === SchoolMembershipRole.student) {
+        if (role === ContextMembershipRole.student) {
             return []
         }
 

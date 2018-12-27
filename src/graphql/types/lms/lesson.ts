@@ -187,12 +187,7 @@ export const Model = new GraphQLObjectType({
     fields: {
         id: {
             type: GraphQLString,
-            resolve(lesson) {
-                if (lesson._id) {
-                    return String(lesson._id)
-                }
-                return null
-            },
+            resolve: ({ _id }) => _id ? String(_id) : null,
         },
         group: {
             type: GroupModel,

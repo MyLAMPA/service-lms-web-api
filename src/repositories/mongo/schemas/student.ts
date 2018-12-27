@@ -1,12 +1,12 @@
 
 import { Schema, SchemaTypes } from 'mongoose'
 
-import { SchoolName } from './school'
+import { ContextName } from './context'
 
 export const StudentName = 'Student'
 
 const studentSchema = new Schema({
-    school:    { type: SchemaTypes.ObjectId, ref: SchoolName, required: true },
+    context:   { type: SchemaTypes.ObjectId, ref: ContextName, required: true },
     firstName: { type: SchemaTypes.String, default: null },
     lastName:  { type: SchemaTypes.String, default: null },
     color:     { type: SchemaTypes.String, default: '' },

@@ -2,6 +2,12 @@
 const { env } = process
 
 export const envConfig = {
+    auth: {
+        accessKey: {
+            id: env.ACCESS_KEY_ID,
+            secret: env.ACCESS_KEY_SECRET,
+        },
+    },
     aws: {
         accessKeyId: env.AWS_ACCESS_KEY_ID,
         secretAccessKey: env.AWS_SECRET_ACCESS_KEY,

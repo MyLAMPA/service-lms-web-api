@@ -9,7 +9,7 @@ import * as moment from 'moment'
 
 import {
     LMSCtx,
-    SchoolMembershipRole,
+    ContextMembershipRole,
 } from '../../../types'
 import { Model as LessonModel } from '../../types/lms/lesson'
 import * as lessonsServices from '../../../services/lessons'
@@ -21,7 +21,7 @@ export const lesson = {
             type: GraphQLString,
         },
     },
-    async resolve(lmsCtx: LMSCtx, { id }, { state }: Request) {
+    async resolve({ role }: LMSCtx, { id }, { state }: Request) {
         if (!_.isNil(id)) {
             const lesson = await lessonsServices.getLessonById(id, state)
             return lesson
@@ -40,17 +40,15 @@ export const lessons = {
             type: GraphQLString,
         },
     },
-    async resolve(lmsCtx: LMSCtx, { dateFrom, dateTo }, { state }: Request) {
-        const searchParams: any = {
-            school: lmsCtx.schoolId,
-        }
+    async resolve({ role, teacherId, studentId, contextId: context }: LMSCtx, { dateFrom, dateTo }, { state }: Request) {
+        const searchParams: any = { context }
 
-        switch (lmsCtx.role) {
-            case SchoolMembershipRole.teacher:
-                searchParams.teachers = { $in: [lmsCtx.teacherId] }
+        switch (role) {
+            case ContextMembershipRole.teacher:
+                searchParams.teachers = { $in: [teacherId] }
                 break
-            case SchoolMembershipRole.student:
-                searchParams.students = { $in: [lmsCtx.studentId] }
+            case ContextMembershipRole.student:
+                searchParams.students = { $in: [studentId] }
                 break
         }
 

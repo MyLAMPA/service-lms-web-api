@@ -15,12 +15,7 @@ export const Model = new GraphQLObjectType({
     fields: {
         id: {
             type: GraphQLString,
-            resolve(course) {
-                if (course._id) {
-                    return String(course._id)
-                }
-                return null
-            },
+            resolve: ({ _id }) => _id ? String(_id) : null,
         },
         email: {
             type: GraphQLString,
@@ -30,9 +25,7 @@ export const Model = new GraphQLObjectType({
         },
         fullName: {
             type: GraphQLString,
-            async resolve(student) {
-                return `${student.firstName} ${student.lastName}`
-            },
+            resolve: student => `${student.firstName} ${student.lastName}`,
         },
         firstName: {
             type: GraphQLString,

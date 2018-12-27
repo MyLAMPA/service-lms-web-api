@@ -26,7 +26,7 @@ export async function createCourse(course: Course, state: State): Promise<Course
     const document = _.merge(
         {},
         _.pick(course, ['name', 'abbr', 'description', 'color']),
-        { school: state.lmsCtx.schoolId }
+        { context: state.lmsCtx.contextId }
     )
     return await coursesRepository.createCourse(document, state)
 }

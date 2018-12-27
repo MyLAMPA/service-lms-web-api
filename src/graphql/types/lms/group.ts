@@ -20,17 +20,8 @@ export const Model = new GraphQLObjectType({
     fields: {
         id: {
             type: GraphQLString,
-            resolve(course) {
-                if (course._id) {
-                    return String(course._id)
-                }
-                return null
-            },
+            resolve: ({ _id }) => _id ? String(_id) : null,
         },
-        // school: {
-        //     type: SchoolModel,
-        //     async resolve() {},
-        // },
         course: {
             type: CourseModel,
             async resolve(group, {}, { state }: Request) {

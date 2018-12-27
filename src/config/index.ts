@@ -29,6 +29,10 @@ const defaultConfig: Config = {
         refreshTokenSecret: 'notSet',
         accessTokenExpirationMinutes: 60 * 60 * 24 * 7, // 7 days
         refreshTokenExpirationMinutes: 60 * 60 * 24 * 365, // 1 year
+        accessKey: {
+            id: 'notSet', // process.env.ACCESS_KEY_ID
+            secret: 'notSet', // process.env.ACCESS_KEY_SECRET
+        },
         jwtSecret: 'abc123',
         hashSaltRounds: 12,
     },

@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-    SchoolMembershipRole,
+    ContextMembershipRole,
 } from '../../../types'
 import { Model as SchoolYearModel } from '../../types/lms/schoolYear'
 import * as schoolYearsServices from '../../../services/schoolYears'
@@ -18,12 +18,12 @@ export const schoolYears = {
     args: {},
     async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
         const searchParams: any = {
-            school: lmsCtx.schoolId,
+            school: lmsCtx.contextId,
         }
 
         switch (lmsCtx.role) {
-            case SchoolMembershipRole.teacher:
-            case SchoolMembershipRole.student:
+            case ContextMembershipRole.teacher:
+            case ContextMembershipRole.student:
                 return []
         }
 

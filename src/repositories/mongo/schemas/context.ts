@@ -2,15 +2,15 @@
 import { Schema, SchemaTypes } from 'mongoose'
 
 import {
-    SchoolStatus,
+    ContextStatus,
 } from '../../../types'
 import { SchoolYearName } from './schoolYear'
 
-export const SchoolName = 'School'
+export const ContextName = 'Context'
 
-const schoolStatusEnum = [
-    SchoolStatus.freetrial, SchoolStatus.active,
-    SchoolStatus.suspended, SchoolStatus.archived,
+const contextStatusEnum = [
+    ContextStatus.freetrial, ContextStatus.active,
+    ContextStatus.suspended, ContextStatus.archived,
 ]
 
 const timetableSettings = {
@@ -18,9 +18,9 @@ const timetableSettings = {
     endHour:   { type: SchemaTypes.Date, required: true },
 }
 
-const schoolSchema = new Schema({
+const contextSchema = new Schema({
     timetableSettings,
-    status:                { type: SchemaTypes.String, enum: schoolStatusEnum, required: true },
+    status:                { type: SchemaTypes.String, enum: contextStatusEnum, required: true },
     createdAt:             { type: SchemaTypes.Date, default: new Date() },
     // billingInfo:           { type: SchemaTypes.ObjectId, ref: 'BillingInfo', default: null },
     name:                  { type: SchemaTypes.String, required: true },
@@ -30,4 +30,4 @@ const schoolSchema = new Schema({
     currentSchoolYear:     { type: SchemaTypes.ObjectId, ref: SchoolYearName, default: null },
 })
 
-export { schoolSchema }
+export { contextSchema }

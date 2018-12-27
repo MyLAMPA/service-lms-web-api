@@ -22,9 +22,9 @@ export type IDCtx = {
 }
 
 export type LMSCtx = {
-    role: SchoolMembershipRole
+    contextId: string
+    role: ContextMembershipRole
     membershipId: string
-    schoolId: string
     userId: number
     studentId: string
     teacherId: string
@@ -32,34 +32,35 @@ export type LMSCtx = {
 
 // Entities
 
-export type SchoolMembership = {
+export type ContextMembership = {
     _id?: string
-    user: number
-    school: string // string|School
-    role: SchoolMembershipRole
-    teacher: string // string|Tea cher
+    userId: number
+    role: ContextMembershipRole
+    context: string // string|Context
+    teacher: string // string|Teacher
     student: string // string|Student
 }
 
-export type School = {
+export type Context = {
     _id?: string
-    timetableSettings: {
-        startHour: Date
-        endHour: Date
-    }
-    status: SchoolStatus
+    status: ContextStatus
+    mode: ContextMode
     createdAt: Date
     // billingInfo: string // string|BillingInfo
     name: string
     abbr: string
-    externalWebUrl: string
+    externalWebUrl: string // ?
     defaultLessonDuration: number
     currentSchoolYear: string // string|SchoolYear
+    timetableSettings: {
+        startHour: Date
+        endHour: Date
+    }
 }
 
 export type SchoolYear = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     title: string
     start: Date
     end: Date
@@ -67,7 +68,7 @@ export type SchoolYear = {
 
 export type Student = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     firstName: string
     lastName: string
     color: string
@@ -75,7 +76,7 @@ export type Student = {
 
 export type Teacher = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     firstName: string
     lastName: string
     abbr: string
@@ -84,7 +85,7 @@ export type Teacher = {
 
 export type Location = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     name: string
     abbr: string
     description: string
@@ -95,14 +96,14 @@ export type Location = {
 
 export type LocationEquipment = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     title: string
     description: string
 }
 
 export type Course = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     name: string
     abbr: string
     description: string
@@ -111,7 +112,7 @@ export type Course = {
 
 export type Group = {
     _id?: string;
-    school: string // string|School
+    context: string // string|Context
     course: string // string|Course
     name: string
     abbr: string
@@ -123,7 +124,7 @@ export type Group = {
 
 export type Homework = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     dueLesson: string // string|Lesson
     originLesson: string // string|Lesson
     title: string
@@ -133,7 +134,7 @@ export type Homework = {
 
 export type Lesson = {
     _id?: string
-    school: string // string|School
+    context: string // string|Context
     group: string // string|Group
     course: string // string|Course
     location: string // string|Location
@@ -159,10 +160,22 @@ export type Lesson = {
 
 // Enums
 
-export enum SchoolMembershipRole {
+export enum ContextMembershipRole {
     student = 'student',
     teacher = 'teacher',
     admin = 'admin',
+}
+
+export enum ContextStatus {
+    freetrial = 'freetrial',
+    active = 'active',
+    suspended = 'suspended',
+    archived = 'archived',
+}
+
+export enum ContextMode {
+    freelancer = 'freelancer',
+    school = 'school',
 }
 
 export enum LessonStatus {
@@ -176,11 +189,4 @@ export enum AttendanceStatus {
     present = 'present',
     absent = 'absent',
     excused = 'excused',
-}
-
-export enum SchoolStatus {
-    freetrial = 'freetrial',
-    active = 'active',
-    suspended = 'suspended',
-    archived = 'archived',
 }

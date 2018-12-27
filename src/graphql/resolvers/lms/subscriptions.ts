@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-    SchoolMembershipRole,
+    ContextMembershipRole,
 } from '../../../types'
 import { Model as SubscriptionModel } from '../../types/subscription'
 import * as subscriptionsServices from '../../../services/subscriptions'
@@ -16,11 +16,11 @@ import * as subscriptionsServices from '../../../services/subscriptions'
 export const subscriptions = {
     type: new GraphQLList(SubscriptionModel),
     args: {},
-    async resolve({ role, schoolId }: LMSCtx, {}, { state }: Request) {
+    async resolve({ contextId, role }: LMSCtx, {}, { state }: Request) {
         let subscriptions = []
 
-        if (role === SchoolMembershipRole.admin) {
-            subscriptions = await subscriptionsServices.getSubscriptionsBySchoolId(schoolId, state)
+        if (role === ContextMembershipRole.admin) {
+            subscriptions = await subscriptionsServices.getSubscriptionsBySchoolId(contextId, state)
         }
 
         return subscriptions

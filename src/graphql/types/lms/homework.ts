@@ -19,12 +19,7 @@ export const DueLessonModel = new GraphQLObjectType({
     fields: {
         id: {
             type: GraphQLString,
-            resolve(dueLesson) {
-                if (dueLesson._id) {
-                    return String(dueLesson._id)
-                }
-                return null
-            },
+            resolve: ({ _id }) => _id ? String(_id) : null,
         },
         start: {
             type: GraphQLString,

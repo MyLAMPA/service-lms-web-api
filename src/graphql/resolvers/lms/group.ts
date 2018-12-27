@@ -7,8 +7,8 @@ import {
 import * as _ from 'lodash'
 
 import {
-    SchoolMembershipRole,
     LMSCtx,
+    ContextMembershipRole,
 } from '../../../types'
 import { Model as GroupModel } from '../../types/lms/group'
 import * as groupsServices from '../../../services/groups'
@@ -20,7 +20,7 @@ export const group = {
             type: GraphQLString,
         },
     },
-    async resolve(lmsCtx: LMSCtx, { id }, { state }: Request) {
+    async resolve({ role }: LMSCtx, { id }, { state }: Request) {
         if (!_.isNil(id)) {
             const group = await groupsServices.getGroupById(id, state)
             return group
@@ -32,16 +32,14 @@ export const group = {
 export const groups = {
     type: new GraphQLList(GroupModel),
     args: {},
-    async resolve(lmsCtx: LMSCtx, {}, { state }: Request) {
-        const searchParams: any = {
-            school: lmsCtx.schoolId,
-        }
+    async resolve({ role, studentId, contextId: context }: LMSCtx, {}, { state }: Request) {
+        const searchParams: any = { context }
 
-        switch (lmsCtx.role) {
-            case SchoolMembershipRole.admin:
-            case SchoolMembershipRole.teacher:
-            case SchoolMembershipRole.student:
-                searchParams.students = { $in: [lmsCtx.userId] }
+        switch (role) {
+            case ContextMembershipRole.admin:
+            case ContextMembershipRole.teacher:
+            case ContextMembershipRole.student:
+                searchParams.students = { $in: [studentId] }
         }
 
         const groups = await groupsServices.getGroups(searchParams, state)
