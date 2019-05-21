@@ -8,9 +8,10 @@ import {
 } from 'express'
 import * as _ from 'lodash'
 import * as joi from 'joi'
+import * as graphql from 'graphql'
 
 import { config } from '../config'
-import { httpErrors as errors, authErrors } from '../errors'
+import { JsonError, httpErrors as errors, authErrors } from '../errors'
 import {
     IDCtx,
 } from '../types'
@@ -44,19 +45,28 @@ export const authorizeUserRequest = async (req: Request, res: Response, next: Ne
             authorizationHeader = <string>_.get(req.headers, 'authorization')
         }
 
-        if (
-            authorizationHeader.split(' ')[0] !== 'Bearer' ||
-            !_.isString(authorizationHeader.split(' ')[1])
-        ) {
-            throw authErrors.unknownAuthorizationHeader()
+        if (!!authorizationHeader && !/^\s*$/.test(authorizationHeader)) {
+            if (
+                authorizationHeader.split(' ')[0] !== 'Bearer' ||
+                !_.isString(authorizationHeader.split(' ')[1])
+            ) {
+                throw authErrors.unknownAuthorizationHeader()
+            }
+    
+            const credentials: string = authorizationHeader.split(' ')[1]
+            const { userId } = await <IDCtx>jwt.verify(credentials, config.auth.accessTokenSecret)
+    
+            req.state.idCtx = { userId }
+
+            return next()
         }
 
-        const credentials: string = authorizationHeader.split(' ')[1]
-        const { userId } = await <IDCtx>jwt.verify(credentials, config.auth.accessTokenSecret)
+        if (config.auth.enablePublicReadProxy) {
+            req.state.idCtx = { userId: null, virtual: true }
+            return next()
+        }
 
-        req.state.idCtx = { userId }
-
-        return next()
+        throw authErrors.unknownAuthorizationHeader()
     } catch (err) {
         req.state.logger.warn({ err }, 'Request Authorization Failed')
         return next(errors.unauthorized('Invalid Credentials'))
@@ -87,6 +97,45 @@ export const validateReqParams =
         return next()
     }
 
+export const jsonErrorSerializer = (err: JsonError): object => {
+    let name = null
+    if (_.has(err, 'name')) {
+        name = _.get(err, 'name')
+    }
+
+    let message = null
+    if (_.has(err, 'message')) {
+        message = _.get(err, 'message')
+    }
+
+    let code = null
+    if (_.has(err, 'errorCode')) {
+        code = _.get(err, 'errorCode')
+    }
+
+    const serialized: any = { name, message, code }
+
+    if (config.params.sendErrorStackTrace) {
+        serialized.stack = _.get(err, 'stack')
+    }
+
+    return serialized
+}
+
+export const parseGraphqlError = (error: graphql.GraphQLError) => {
+    let jsonError = null
+    if (_.has(error, 'originalError')) {
+        jsonError = jsonErrorSerializer(_.get(error, 'originalError') as JsonError)
+    }
+
+    return {
+        jsonError,
+        message: _.get(error, 'message'),
+        locations: _.get(error, 'locations'),
+        path: _.get(error, 'path'),
+    }
+}
+
 function errorOutputSerializer(err: any): object {
     const data = _.get(err, 'body.data')
     if (_.isArray(data) && data.length > 0 && _.isObject(data[0])) {
@@ -95,15 +144,10 @@ function errorOutputSerializer(err: any): object {
         return { message: messages }
     }
 
-    const serialized: any = _.pick(err, ['message', 'name'])
+    const serialized: any = jsonErrorSerializer(err)
+
     if (_.has(err, 'httpStatus')) {
         serialized.status = _.get(err, 'httpStatus')
-    }
-    if (_.has(err, 'errorCode')) {
-        serialized.code = _.get(err, 'errorCode')
-    }
-    if (config.params.sendErrorStackTrace) {
-        serialized.stack = _.get(err, 'stack')
     }
 
     return serialized
@@ -120,7 +164,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     const serializedError: object = errorOutputSerializer(err)
 
     return res.json({ error: serializedError })
-};
+}
 
 export const standardHandler = (req: Request, res: Response, next: NextFunction) => {
     if (_.has(req, 'state.out')) {

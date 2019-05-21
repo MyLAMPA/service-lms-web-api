@@ -11,7 +11,7 @@ import {
 import * as _ from 'lodash'
 
 export const Model = new GraphQLObjectType({
-    name: 'User',
+    name: 'Identity_User',
     fields: {
         id: {
             type: GraphQLInt,

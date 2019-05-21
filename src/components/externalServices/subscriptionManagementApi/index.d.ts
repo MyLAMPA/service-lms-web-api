@@ -12,7 +12,7 @@ export interface Subscription {
     purchaseDate: Date
     expirationDate: Date
     userId: number
-    schoolId: string
+    lmsContextId: string
 }
 
 export enum SubscriptionStatus {

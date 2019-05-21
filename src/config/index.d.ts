@@ -39,6 +39,7 @@ export type ParamsConfig = {
 }
 
 export type AuthConfig = {
+    enablePublicReadProxy: boolean
     accessTokenSecret: string
     refreshTokenSecret: string
     accessTokenExpirationMinutes: number

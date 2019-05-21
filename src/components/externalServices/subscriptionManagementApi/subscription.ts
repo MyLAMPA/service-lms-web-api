@@ -19,8 +19,8 @@ export async function getSubscriptionsByUserId(userId: number, state: State): Pr
     return []
 }
 
-export async function getSubscriptionsBySchoolId(schoolId: string, state: State): Promise<Subscription[]> {
-    const subscriptions = await source.httpGet<Subscription[]>('/api/subscriptions', { schoolId })
+export async function getSubscriptionsByLmsContext(lmsContextId: string, state: State): Promise<Subscription[]> {
+    const subscriptions = await source.httpGet<Subscription[]>('/api/subscriptions', { lmsContextId })
     if (_.isArray(subscriptions)) {
         return subscriptions.filter(item => !_.isEmpty(item))
     }

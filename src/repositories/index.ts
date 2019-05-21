@@ -1,8 +1,16 @@
 
+// Library context
+
+export {
+    subjectsRepository,
+    lessonPlansRepository,
+} from './library'
+
+
 // MongoDB repositories
 
-import * as contextsRepository from './mongo/contexts'
-import * as contextMembershipsRepository from './mongo/contextMemberships'
+import * as lmsContextsRepository from './mongo/lmsContexts'
+import * as lmsContextMembershipsRepository from './mongo/lmsContextMemberships'
 import * as coursesRepository from './mongo/courses'
 import * as groupsRepository from './mongo/groups'
 import * as homeworksRepository from './mongo/homeworks'
@@ -13,8 +21,8 @@ import * as locationsRepository from './mongo/locations'
 import * as studentsRepository from './mongo/students'
 import * as teachersRepository from './mongo/teachers'
 
-export { contextsRepository }
-export { contextMembershipsRepository }
+export { lmsContextsRepository }
+export { lmsContextMembershipsRepository }
 export { coursesRepository }
 export { groupsRepository }
 export { homeworksRepository }
@@ -24,3 +32,8 @@ export { locationEquipmentsRepository }
 export { locationsRepository }
 export { studentsRepository }
 export { teachersRepository }
+
+
+import * as libraryRepositories from './library'
+
+export { libraryRepositories }

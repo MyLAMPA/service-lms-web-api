@@ -15,15 +15,22 @@ export type State = {
     lmsCtx?: LMSCtx
 }
 
+// Security models
+
+export type PrivacyPolicy = {
+    isPublic: boolean
+}
+
 // Contexts
 
 export type IDCtx = {
     userId: number
+    virtual?: boolean
 }
 
 export type LMSCtx = {
     contextId: string
-    role: ContextMembershipRole
+    role: LMSContextMembershipRole
     membershipId: string
     userId: number
     studentId: string
@@ -32,20 +39,21 @@ export type LMSCtx = {
 
 // Entities
 
-export type ContextMembership = {
+export type LMSContextMembership = {
     _id?: string
     userId: number
-    role: ContextMembershipRole
+    role: LMSContextMembershipRole
     context: string // string|Context
     teacher: string // string|Teacher
     student: string // string|Student
 }
 
-export type Context = {
+export type LMSContext = {
     _id?: string
     status: ContextStatus
     mode: ContextMode
     createdAt: Date
+    linkedSchoolId: number
     // billingInfo: string // string|BillingInfo
     name: string
     abbr: string
@@ -160,7 +168,7 @@ export type Lesson = {
 
 // Enums
 
-export enum ContextMembershipRole {
+export enum LMSContextMembershipRole {
     student = 'student',
     teacher = 'teacher',
     admin = 'admin',

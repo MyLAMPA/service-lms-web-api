@@ -1,12 +1,12 @@
 
 import { Schema, SchemaTypes } from 'mongoose'
 
-import { ContextName } from './context'
+import { LMSContextName } from './lmsContext'
 
 export const SchoolYearName = 'SchoolYear'
 
 const schoolYearSchema = new Schema({
-    context: { type: SchemaTypes.ObjectId, ref: ContextName, required: true },
+    context: { type: SchemaTypes.ObjectId, ref: LMSContextName, required: true },
     title:   { type: SchemaTypes.String, default: null },
     start:   { type: SchemaTypes.Date, required: true },
     end:     { type: SchemaTypes.Date, required: true },

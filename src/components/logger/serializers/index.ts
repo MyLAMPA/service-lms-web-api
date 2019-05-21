@@ -46,4 +46,7 @@ export const serializers = {
     trackers(params): any {
         return _.pick(params, ['correlationId'])
     },
+    err(err): any {
+        return _.pick(err, ['name', 'message', 'stack', 'description'])
+    },
 }

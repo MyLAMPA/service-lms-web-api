@@ -25,6 +25,7 @@ const defaultConfig: Config = {
         sendErrorStackTrace: true,
     },
     auth: {
+        enablePublicReadProxy: true,
         accessTokenSecret: 'notSet',
         refreshTokenSecret: 'notSet',
         accessTokenExpirationMinutes: 60 * 60 * 24 * 7, // 7 days

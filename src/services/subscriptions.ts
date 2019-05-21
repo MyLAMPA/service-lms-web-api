@@ -11,8 +11,8 @@ export async function getSubscriptionsByUserId(userId: number, state: State) {
     return subscriptions
 }
 
-export async function getSubscriptionsBySchoolId(schoolId: string, state: State) {
-    const subscriptions = await subscriptionManagementApi.subscriptions.getSubscriptionsBySchoolId(schoolId, state)
+export async function getSubscriptionsByLmsContext(lmsContextId: string, state: State) {
+    const subscriptions = await subscriptionManagementApi.subscriptions.getSubscriptionsByLmsContext(lmsContextId, state)
     return subscriptions
 }
 

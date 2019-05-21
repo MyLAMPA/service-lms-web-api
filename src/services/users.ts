@@ -5,9 +5,12 @@ import { httpErrors as errors } from '../errors'
 import {
     State,
 } from '../types'
+import {
+    User,
+} from '../types/identity'
 import * as identityApi from '../components/externalServices/identity'
 
-export async function getUserById(userId: number, state: State) {
+export async function getUserById(userId: number, state: State): Promise<User> {
     const user = await identityApi.users.getUserById(userId, state)
     if (user) {
         return user
@@ -15,7 +18,7 @@ export async function getUserById(userId: number, state: State) {
     throw errors.notFound('User Not Found')
 }
 
-export async function getOrCreateUserByEmail(email: string, state: State) {
+export async function getOrCreateUserByEmail(email: string, state: State): Promise<User> {
     const user = await identityApi.users.getOrCreateUserByEmail(email, state)
     if (user) {
         return user

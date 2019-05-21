@@ -1,13 +1,13 @@
 
 import { Schema, SchemaTypes } from 'mongoose'
 
-import { ContextName } from './context'
+import { LMSContextName } from './lmsContext'
 import { LocationEquipmentName } from './locationEquipment'
 
 export const LocationName = 'Location'
 
 const locationSchema = new Schema({
-    context:     { type: SchemaTypes.ObjectId, ref: ContextName, required: true },
+    context:     { type: SchemaTypes.ObjectId, ref: LMSContextName, required: true },
     name:        { type: SchemaTypes.String, required: true },
     abbr:        { type: SchemaTypes.String, required: true },
     description: { type: SchemaTypes.String, default: null },

@@ -1,14 +1,14 @@
 
 import { Schema, SchemaTypes } from 'mongoose'
 
-import { ContextName } from './context'
+import { LMSContextName } from './lmsContext'
 import { CourseName } from './course'
 import { StudentName } from './student'
 
 export const GroupName = 'Group'
 
 const groupSchema = new Schema({
-    context:     { type: SchemaTypes.ObjectId, ref: ContextName, required: true },
+    context:     { type: SchemaTypes.ObjectId, ref: LMSContextName, required: true },
     course:      { type: SchemaTypes.ObjectId, ref: CourseName, default: null },
     name:        { type: SchemaTypes.String, required: true },
     abbr:        { type: SchemaTypes.String, required: true },

@@ -1,8 +1,8 @@
 
 import { GraphQLEnumType } from 'graphql'
 
-export const ContextStatusEnum = new GraphQLEnumType({
-    name: 'SchoolStatus',
+export const LMSContextStatusEnum = new GraphQLEnumType({
+    name: 'LMSContextStatus',
     values: {
         freetrial: {
             value: 'freetrial',
@@ -15,6 +15,33 @@ export const ContextStatusEnum = new GraphQLEnumType({
         },
         archived: {
             value: 'archived',
+        },
+    },
+})
+
+export const LMSContextModeEnum = new GraphQLEnumType({
+    name: 'LMSContextMode',
+    values: {
+        freelancer: {
+            value: 'freelancer',
+        },
+        school: {
+            value: 'school',
+        },
+    },
+})
+
+export const LMSContextMembershipRoleEnum = new GraphQLEnumType({
+    name: 'LMSContextMembershipRole',
+    values: {
+        student: {
+            value: 'student',
+        },
+        teacher: {
+            value: 'teacher',
+        },
+        admin: {
+            value: 'admin',
         },
     },
 })
@@ -33,21 +60,6 @@ export const LessonStatusEnum = new GraphQLEnumType({
         },
         canceled: {
             value: 'canceled',
-        },
-    },
-})
-
-export const ContextMembershipRoleEnum = new GraphQLEnumType({
-    name: 'ContextMembershipRole',
-    values: {
-        student: {
-            value: 'student',
-        },
-        teacher: {
-            value: 'teacher',
-        },
-        admin: {
-            value: 'admin',
         },
     },
 })

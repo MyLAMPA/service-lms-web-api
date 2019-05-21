@@ -6,11 +6,11 @@ import { httpErrors as errors } from '../errors'
 import {
     State,
     Teacher,
-    ContextMembershipRole,
+    LMSContextMembershipRole,
 } from '../types'
 import { teachersRepository } from '../repositories'
 import * as usersServices from './users'
-import * as contextMembershipsServices from './contextMemberships'
+import * as lmsContextMembershipsServices from './lmsContextMemberships'
 
 export async function getTeachers(params: object, state: State): Promise<Teacher[]> {
     const teachers = await teachersRepository.getTeachers(params, state)
@@ -30,9 +30,9 @@ export async function createTeacher(teacher: Teacher, email: string, state: Stat
 
     if (email) {
         const user = await usersServices.getOrCreateUserByEmail(email, state)
-        await contextMembershipsServices.createSchoolMembership({
+        await lmsContextMembershipsServices.createLMSContextMembership({
             context: state.lmsCtx.contextId,
-            role: ContextMembershipRole.teacher,
+            role: LMSContextMembershipRole.teacher,
             userId: user.id,
             teacher: createdTeacher._id,
             student: null,

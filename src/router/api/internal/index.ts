@@ -1,10 +1,10 @@
 
 import { Router } from 'express'
 
-import { router as contextsRouter } from './contexts'
+import { router as lmsContextsRouter } from './lmsContexts'
 
 const router = Router()
 
-router.use('/contexts', contextsRouter)
+router.use('/lmsContexts', lmsContextsRouter)
 
 export { router }

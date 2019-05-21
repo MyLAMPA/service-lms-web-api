@@ -11,22 +11,15 @@ import {
 import * as _ from 'lodash'
 import * as moment from 'moment'
 
-import { subscriptions } from '../../resolvers/lms/subscriptions'
-import { context } from '../../resolvers/lms/context'
-import { schoolYears } from '../../resolvers/lms/schoolYears'
-import { course, courses } from '../../resolvers/lms/course'
-import { group, groups } from '../../resolvers/lms/group'
-import { lesson } from '../../resolvers/lms/lesson'
-import { location, locations } from '../../resolvers/lms/location'
-import { locationEquipment, locationEquipments } from '../../resolvers/lms/locationEquipment'
-import { student, students } from '../../resolvers/lms/student'
-import { teacher, teachers } from '../../resolvers/lms/teacher'
+import {
+    LMSCtx,
+    LMSContextMembershipRole,
+} from '../../../types'
 import * as schoolYearsServices from '../../../services/schoolYears'
-import { ContextStatusEnum } from '../enums'
+import * as subscriptionsServices from '../../../services/subscriptions'
+import { LMSContextStatusEnum, LMSContextModeEnum } from '../enums'
+import { Model as SubscriptionModel } from '../subscription'
 import { Model as SchoolYearModel } from './schoolYear'
-
-// import * as messagesServices from '../../../services/chat/messages'
-// import * as chatContextServices from '../../../services/chat/context'
 
 export const TimetableSettingsModel = new GraphQLObjectType({
     name: 'TimetableSettings',
@@ -45,20 +38,35 @@ export const TimetableSettingsModel = new GraphQLObjectType({
 })
 
 export const Model = new GraphQLObjectType({
-    name: 'Context',
+    name: 'LMS_Context',
     fields: {
         id: {
             type: GraphQLString,
             resolve: ({ _id }) => _id ? String(_id) : null,
         },
-        timetableSettings: {
-            type: TimetableSettingsModel,
+        subscriptions: {
+            type: new GraphQLList(SubscriptionModel),
+            async resolve({ contextId, role }: LMSCtx, {}, { state }: Request) {
+                let subscriptions = []
+
+                if (state.lmsCtx.role === LMSContextMembershipRole.admin) {
+                    subscriptions = await subscriptionsServices.getSubscriptionsByLmsContext(contextId, state)
+                }
+
+                return subscriptions
+            },
         },
         status: {
-            type: ContextStatusEnum,
+            type: LMSContextStatusEnum,
+        },
+        mode: {
+            type: LMSContextModeEnum,
         },
         createdAt: {
             type: GraphQLString,
+        },
+        timetableSettings: {
+            type: TimetableSettingsModel,
         },
         name: {
             type: GraphQLString,
@@ -74,13 +82,12 @@ export const Model = new GraphQLObjectType({
         },
         currentSchoolYear: {
             type: SchoolYearModel,
-            async resolve(lmsContext, {}, { state }: Request) {
-                if (typeof lmsContext.currentSchoolYear === 'string' || _.get(lmsContext.currentSchoolYear, '_bsontype') === 'ObjectID') {
-                    const currentSchoolYear = await schoolYearsServices.getSchoolYearById(lmsContext.currentSchoolYear, state)
-                    return currentSchoolYear
+            async resolve({ currentSchoolYear }, {}, { state }: Request) {
+                if (typeof currentSchoolYear === 'string' || _.get(currentSchoolYear, '_bsontype') === 'ObjectID') {
+                    return await schoolYearsServices.getSchoolYearById(currentSchoolYear, state)
                 }
-                if (lmsContext.currentSchoolYear) {
-                    return lmsContext.currentSchoolYear
+                if (currentSchoolYear) {
+                    return currentSchoolYear
                 }
                 return null
             },
@@ -92,20 +99,5 @@ export const Model = new GraphQLObjectType({
                 return schoolYears
             },
         },
-    },
-})
-
-export const LMSContext = new GraphQLObjectType({
-    name: 'LMSContext',
-    fields: {
-        context, subscriptions,
-        schoolYears,
-        course, courses,
-        group, groups,
-        lesson,
-        location, locations,
-        locationEquipment, locationEquipments,
-        student, students,
-        teacher, teachers,
     },
 })

@@ -5,6 +5,7 @@ import { ForbiddenError } from './httpErrors/ForbiddenError'
 import { NotFoundError } from './httpErrors/NotFoundError'
 import { UnauthorizedError } from './httpErrors/UnauthorizedError'
 import { ServerError } from './httpErrors/ServerError'
+import { BadGatewayError } from './httpErrors/BadGatewayError'
 import { ConflictError } from './httpErrors/ConflictError'
 import { UnprocessableEntityError } from './httpErrors/UnprocessableEntityError'
 import { errorCodes } from './errorCodes'
@@ -27,6 +28,9 @@ export const httpErrors = {
 
     serverError: (message: string = 'Server Error', errorCode: number = null): ServerError =>
         new ServerError(message, errorCode),
+
+    badGateway: (message: string = 'Bad Gateway', errorCode: number = null): BadGatewayError =>
+        new BadGatewayError(message, errorCode),
 
     unprocessableEntityError: (message: string = 'Unprocessable Entity', errorCode: number = null): UnprocessableEntityError =>
         new UnprocessableEntityError(message, errorCode),
