@@ -25,7 +25,16 @@ export const Model = new GraphQLObjectType({
 })
 
 export const CreateModel = new GraphQLInputObjectType({
-    name: 'Document',
+    name: 'Document_Create',
+    fields: {
+        json: {
+            type: GraphQLString,
+        },
+    },
+})
+
+export const UpdateModel = new GraphQLInputObjectType({
+    name: 'Document_Update',
     fields: {
         json: {
             type: GraphQLString,

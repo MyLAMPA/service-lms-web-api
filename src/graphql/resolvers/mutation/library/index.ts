@@ -5,13 +5,13 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { createActivity } from './activity'
+import { createActivity, updateActivity } from './activity'
 
 export const library = {
     type: new GraphQLObjectType({
         name: 'M_Library_Context',
         fields: {
-            createActivity,
+            createActivity, updateActivity,
         },
     }),
     args: {},

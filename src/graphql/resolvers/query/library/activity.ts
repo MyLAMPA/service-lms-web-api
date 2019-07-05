@@ -3,6 +3,8 @@ import { Request } from 'express'
 import {
     GraphQLList,
     GraphQLString,
+    GraphQLInt,
+    GraphQLNonNull,
 } from 'graphql'
 import * as _ from 'lodash'
 
@@ -10,39 +12,72 @@ import { httpErrors } from '../../../../errors'
 import {
     IDCtx,
 } from '../../../../types'
-import { Model as ActivityModel } from '../../../types/library/activity'
+import { Pagination } from '../../../../helpers/pagination'
+import { Model as PaginationModel } from '../../../types/pagination'
+import {
+    Model as ActivityModel,
+    Edges as ActivityEdges,
+} from '../../../types/library/activity'
 import * as activitiesServices from '../../../../services/library/activities'
-
-export const myActivities = {
-    type: new GraphQLList(ActivityModel),
-    args: {},
-    async resolve({}: IDCtx, {}, { state }: Request) {
-        if (state.idCtx.virtual) {
-            throw httpErrors.unauthorized()
-        }
-
-        const activites = await activitiesServices.getUserActivities(state.idCtx.userId, state)
-        return activites
-    },
-}
 
 export const activity = {
     type: ActivityModel,
     args: {
-        id: {
+        slug: {
             type: GraphQLString,
         },
     },
-    async resolve({}: IDCtx, { id: activityId }, { state }: Request) {
-        if (activityId) {
-            const activity = await activitiesServices.getActivityById(activityId, state)
+    async resolve({}: IDCtx, { slug }, { state }: Request) {
+        if (slug) {
+            const activity = await activitiesServices.getActivityBySlug(slug, state)
             return activity
         }
         return null
     },
 }
 
-// interface GQLField<Context, Args, Request, Type = any> {}
-// const gqlField =
-//     <Context, Args, Request = any, Type = any>(field: GQLField<Context, Args, Request, Type>):
-//         GQLField<Context, Args, Request, Type> => field
+export const searchMyActivities = {
+    type: ActivityEdges,
+    args: {
+        query: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        pagination: {
+            type: PaginationModel,
+        },
+    },
+    async resolve({ virtual, userId }: IDCtx, { query, pagination }, { state }: Request) {
+        if (virtual) {
+            throw httpErrors.unauthorized()
+        }
+
+        return await activitiesServices.searchMyActivities(
+            query,
+            Pagination.parse(pagination),
+            state,
+        )
+    },
+}
+
+export const searchActivities = {
+    type: ActivityEdges,
+    args: {
+        query: {
+            type: GraphQLString,
+        },
+        pagination: {
+            type: PaginationModel,
+        },
+    },
+    async resolve({ virtual }: IDCtx, { query, pagination }, { state }: Request) {
+        if (virtual) {
+            throw httpErrors.unauthorized()
+        }
+
+        return await activitiesServices.searchPublicActivities(
+            query,
+            Pagination.parse(pagination),
+            state,
+        )
+    },
+}

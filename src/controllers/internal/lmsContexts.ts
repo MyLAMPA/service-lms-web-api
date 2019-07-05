@@ -6,7 +6,7 @@ import {
     LMSContext,
     ContextStatus,
 } from '../../types'
-import * as lmsContextsServices from '../../services/lmsContexts'
+import * as lmsContextsServices from '../../services/lms/lmsContexts'
 
 export const getLMSContext = async (req: Request) => {
     const { lmsContextId } = req.params

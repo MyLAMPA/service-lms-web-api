@@ -15,7 +15,7 @@ import {
     LMSCtx,
     LMSContextMembershipRole,
 } from '../../../types'
-import * as schoolYearsServices from '../../../services/schoolYears'
+import * as schoolYearsServices from '../../../services/lms/schoolYears'
 import * as subscriptionsServices from '../../../services/subscriptions'
 import { LMSContextStatusEnum, LMSContextModeEnum } from '../enums'
 import { Model as SubscriptionModel } from '../subscription'

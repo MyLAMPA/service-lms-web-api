@@ -7,7 +7,19 @@ export {
 } from './library'
 
 
-// MongoDB repositories
+// MySQL repositories
+
+import * as usersRepository from './mysql/users'
+
+export { usersRepository }
+
+// DynamoDb repositories
+
+import * as emailAddressesRepository from './dynamo/emailAddresses'
+
+export { emailAddressesRepository }
+
+// MongoDb repositories
 
 import * as lmsContextsRepository from './mongo/lmsContexts'
 import * as lmsContextMembershipsRepository from './mongo/lmsContextMemberships'

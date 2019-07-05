@@ -5,7 +5,7 @@ export function toBuffer(value: any): Buffer {
     if (value.type === 'Buffer') {
         return new Buffer(value.data)
     }
-    
+
     return value
 }
 

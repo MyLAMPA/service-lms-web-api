@@ -7,6 +7,7 @@ import {
 import { identity } from './identity'
 import { library } from './library'
 import { lms } from './lms'
+import { user } from './user'
 // import { chat } from './chat'
 
 const query = new GraphQLObjectType({
@@ -15,6 +16,7 @@ const query = new GraphQLObjectType({
         identity,
         library,
         lms,
+        user,
         // chat,
     },
 })

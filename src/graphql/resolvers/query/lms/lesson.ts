@@ -12,7 +12,7 @@ import {
     LMSContextMembershipRole,
 } from '../../../../types'
 import { Model as LessonModel } from '../../../types/lms/lesson'
-import * as lessonsServices from '../../../../services/lessons'
+import * as lessonsServices from '../../../../services/lms/lessons'
 
 export const lesson = {
     type: LessonModel,

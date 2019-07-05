@@ -53,3 +53,20 @@ export const credentialsErrors = {
     invalidEmailOrUsername: (): BadRequestError =>
         httpErrors.badRequest('Invalid Email Or Username', errorCodes.credentials.invalidEmailOrUsername),
 }
+
+export const libraryErrors = {
+    activityNotFound: (): NotFoundError =>
+        httpErrors.notFound('Activity Not Found', errorCodes.library.activityNotFound),
+}
+
+export const elasticErrors = {
+    queryFailed: (): BadGatewayError =>
+        httpErrors.badGateway('Elastic Query Failed'),
+    queryTimedOut: (): BadGatewayError =>
+        httpErrors.badGateway('Elastic Query Timed Out'),
+}
+
+export const lmsErrors = {
+    forbiddenLMSContextMembership: (): ForbiddenError =>
+        httpErrors.forbidden('Forbidden LMSContextMembership', errorCodes.lms.forbiddenLMSContextMembership),
+}

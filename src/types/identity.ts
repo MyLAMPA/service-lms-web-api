@@ -1,9 +1,10 @@
 
 export interface User {
     id: number
-    username: string
-    email: string
-    isEmailVerified: boolean
+    username: string   
+    primaryEmailAddress?: string
+    birthDate?: Date
+    sex?: 'male'|'female'
     firstName: string
     lastName: string
     image: string

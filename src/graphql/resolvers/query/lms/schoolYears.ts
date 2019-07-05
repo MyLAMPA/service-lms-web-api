@@ -11,7 +11,7 @@ import {
     LMSContextMembershipRole,
 } from '../../../../types'
 import { Model as SchoolYearModel } from '../../../types/lms/schoolYear'
-import * as schoolYearsServices from '../../../../services/schoolYears'
+import * as schoolYearsServices from '../../../../services/lms/schoolYears'
 
 export const schoolYears = {
     type: new GraphQLList(SchoolYearModel),

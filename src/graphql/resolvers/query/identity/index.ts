@@ -8,6 +8,8 @@ import {
 import { httpErrors } from '../../../../errors'
 import { user } from './user'
 import { lmsContextMemberships } from './lmsContextMemberships'
+import { paymentCard } from './paymentCard'
+import { subscriptions } from './subscriptions'
 
 export const identity = {
     type: new GraphQLObjectType({
@@ -15,6 +17,8 @@ export const identity = {
         fields: {
             user,
             lmsContextMemberships,
+            paymentCard,
+            subscriptions,
         },
     }),
     args: {},

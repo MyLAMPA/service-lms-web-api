@@ -11,7 +11,7 @@ import {
     LMSContextMembershipRole,
 } from '../../../../types'
 import { Model as GroupModel } from '../../../types/lms/group'
-import * as groupsServices from '../../../../services/groups'
+import * as groupsServices from '../../../../services/lms/groups'
 
 export const group = {
     type: GroupModel,

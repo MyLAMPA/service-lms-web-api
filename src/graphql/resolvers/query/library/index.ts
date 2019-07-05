@@ -6,14 +6,14 @@ import {
 } from 'graphql'
 
 import { lessonPlan, lessonPlans } from './lessonPlan'
-import { activity, myActivities } from './activity'
+import { activity, searchMyActivities, searchActivities } from './activity'
 
 export const library = {
     type: new GraphQLObjectType({
         name: 'Library_Context',
         fields: {
             lessonPlan, lessonPlans,
-            activity, myActivities,
+            activity, searchMyActivities, searchActivities,
         },
     }),
     args: {},

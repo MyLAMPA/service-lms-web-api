@@ -19,6 +19,7 @@ export interface LessonPlan {
     _id?: string
     createdAt: Date
     createdBy: number
+    slug?: string
     subject: string // string|Subject
     cefLevel: CEFLevel[]
     recomendedAge: RecomendedAge[]
@@ -31,13 +32,19 @@ export interface LessonPlan {
     }[]
 }
 
+export interface Document {
+    json: string
+}
+
 export interface Activity {
     _id?: string
     createdAt: Date
     createdBy: number
+    slug?: string
     privacyPolicy: PrivacyPolicy
     title: string
-    procedure: string
+    procedure: Document
+    duration?: number
     isRepeatable?: boolean
     tags: {
         key: string

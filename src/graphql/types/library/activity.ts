@@ -11,8 +11,16 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { Model as DocumentModel, CreateModel as DocumentCreateModel } from '../document'
-import { Model as TagModel, CreateModel as TagCreateModel } from './tag'
+import { edges } from '../edges'
+import {
+    Model as DocumentModel,
+    CreateModel as DocumentCreateModel,
+    UpdateModel as DocumentUpdateModel,
+} from '../document'
+import {
+    Model as TagModel,
+    CreateModel as TagCreateModel,
+} from './tag'
 
 export const Model = new GraphQLObjectType({
     name: 'Library_Activity',
@@ -28,11 +36,17 @@ export const Model = new GraphQLObjectType({
         createdBy: {
             type: GraphQLInt,
         },
+        slug: {
+            type: GraphQLString,
+        },
         title: {
             type: GraphQLString,
         },
         procedure: {
-            type: GraphQLString, // DocumentModel,
+            type: DocumentModel,
+        },
+        duration: {
+            type: GraphQLInt,
         },
         isRepeatable: {
             type: GraphQLBoolean,
@@ -43,6 +57,8 @@ export const Model = new GraphQLObjectType({
     },
 })
 
+export const Edges = edges(Model)
+
 export const CreateModel = new GraphQLInputObjectType({
     name: 'Library_Activity_Create',
     fields: {
@@ -50,13 +66,16 @@ export const CreateModel = new GraphQLInputObjectType({
             type: GraphQLString,
         },
         procedure: {
-            type: GraphQLString, // DocumentCreateModel,
+            type: DocumentCreateModel,
         },
-        tags: {
-            type: new GraphQLList(TagCreateModel),
+        duration: {
+            type: GraphQLInt,
         },
         isRepeatable: {
             type: GraphQLBoolean,
+        },
+        tags: {
+            type: new GraphQLList(TagCreateModel),
         },
         privacyPolicy: {
             type: new GraphQLInputObjectType({
@@ -67,6 +86,24 @@ export const CreateModel = new GraphQLInputObjectType({
                     },
                 },
             }),
+        },
+    },
+})
+
+export const UpdateModel = new GraphQLInputObjectType({
+    name: 'Library_Activity_Update',
+    fields: {
+        title: {
+            type: GraphQLString,
+        },
+        procedure: {
+            type: DocumentUpdateModel,
+        },
+        duration: {
+            type: GraphQLInt,
+        },
+        isRepeatable: {
+            type: GraphQLBoolean,
         },
     },
 })

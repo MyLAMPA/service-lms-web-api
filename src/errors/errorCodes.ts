@@ -10,4 +10,13 @@ export const errorCodes = {
     credentials: {
         invalidEmailOrUsername: 400401,
     },
+    paymentsErrors: {
+        defaultSourceMissing: 404501,
+    },
+    library: {
+        activityNotFound: 404601,
+    },
+    lms: {
+        forbiddenLMSContextMembership: 600101,
+    },
 }

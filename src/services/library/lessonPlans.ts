@@ -1,16 +1,22 @@
 
+import slugify from 'slugify'
 import * as _ from 'lodash'
 
-import { httpErrors as errors } from '../../errors'
+import { httpErrors as errors, httpErrors } from '../../errors'
 import {
     State,
 } from '../../types'
 import {
     LessonPlan,
 } from '../../types/library'
+import { normalizeString } from '../../helpers/normalizeString'
 import { lessonPlansRepository } from '../../repositories'
 
-export async function getLessonPlanById(lessonPlanId: string, state: State): Promise<LessonPlan> {
+const slugifyLessonPlanTitle = (title: string, state: State): string => {
+    throw httpErrors.serverError('Not Implemented')
+}
+
+export const getLessonPlanById = async(lessonPlanId: string, state: State): Promise<LessonPlan> => {
     const lessonPlan = await lessonPlansRepository.getLessonPlanById(lessonPlanId, state)
     if (lessonPlan) {
         return lessonPlan

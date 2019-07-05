@@ -50,12 +50,34 @@ const defaultConfig: Config = {
         db: 'lampa',
         tablePrefix: '',
     },
-    subscriptionManagementService: {
+    elasticSearch: {
+        host: 'notSet',
+    },
+    mysql: {
+        host: 'notSet',
+        port: 3306,
+        database: 'notSet',
+        user: 'notSet',
+        password: 'notSet',
+        // timeout: 1500, // 1.5s
+        // connectTimeout: 2500, // 2.5s
+    },
+    identityService: {
         baseUrl: 'notSet',
         accessKeyId: 'notSet',
         secretAccessKey: 'notSet',
     },
-    identityService: {
+    stripeConnectService: {
+        baseUrl: 'notSet',
+        accessKeyId: 'notSet',
+        secretAccessKey: 'notSet',
+    },
+    subscriptionsService: {
+        baseUrl: 'notSet',
+        accessKeyId: 'notSet',
+        secretAccessKey: 'notSet',
+    },
+    subscriptionManagementService: {
         baseUrl: 'notSet',
         accessKeyId: 'notSet',
         secretAccessKey: 'notSet',

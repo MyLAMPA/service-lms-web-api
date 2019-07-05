@@ -11,7 +11,7 @@ import {
     LMSContextMembershipRole,
 } from '../../../../types'
 import { Model as LocationModel } from '../../../types/lms/location'
-import * as locationsServices from '../../../../services/locations'
+import * as locationsServices from '../../../../services/lms/locations'
 
 export const location = {
     type: LocationModel,

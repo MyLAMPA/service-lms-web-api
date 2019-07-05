@@ -10,7 +10,7 @@ import {
 } from '../../types/library'
 import { subjectsRepository } from '../../repositories'
 
-export async function getSubjectById(subjectId: string, state: State): Promise<Subject> {
+export const getSubjectById = async(subjectId: string, state: State): Promise<Subject> => {
     const subject = await subjectsRepository.getSubjectById(subjectId, state)
     if (subject) {
         return subject

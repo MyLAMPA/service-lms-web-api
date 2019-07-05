@@ -3,8 +3,10 @@ import {
     LoggerOptions as BunyanLoggerOptions,
 } from 'bunyan'
 
-import { SubscriptionManagementServiceConfig } from '../components/externalServices/subscriptionManagementApi/index.d'
 import { IdentityServiceConfig } from '../components/externalServices/identity/index.d'
+import { StripeConnectServiceConfig } from '../components/externalServices/stripeConnect/index.d'
+import { SubscriptionManagementServiceConfig } from '../components/externalServices/subscriptionManagementApi/index.d'
+import { SubscriptionsServiceConfig } from '../components/externalServices/subscriptionsService/index.d'
 
 export type Config = {
     environment: string
@@ -16,8 +18,12 @@ export type Config = {
     auth: AuthConfig
     aws: AWSConfig
     mongoose: MongooseConfig
-    subscriptionManagementService: SubscriptionManagementServiceConfig
+    elasticSearch: ElasticSearchConfig
+    mysql: MysqlConfig
     identityService: IdentityServiceConfig
+    stripeConnectService: StripeConnectServiceConfig
+    subscriptionManagementService: SubscriptionManagementServiceConfig
+    subscriptionsService: SubscriptionsServiceConfig
     smtp: SMTPConfig
 }
 
@@ -67,6 +73,20 @@ export type MongooseConfig = {
     uri: string
     db: string
     tablePrefix: string
+}
+
+export type ElasticSearchConfig = {
+    host: string
+}
+
+export type MysqlConfig = {
+    host: string
+    port: number
+    database: string
+    user: string
+    password: string
+    // timeout: number
+    // connectTimeout: number
 }
 
 export type SMTPConfig = {

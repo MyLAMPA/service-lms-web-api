@@ -10,7 +10,7 @@ import {
     LMSCtx,
 } from '../../../../types'
 import { Model as ContextModel } from '../../../types/lms/context'
-import * as lmsContextsServices from '../../../../services/lmsContexts'
+import * as lmsContextsServices from '../../../../services/lms/lmsContexts'
 
 export const context = {
     type: ContextModel,

@@ -23,6 +23,7 @@ export const LessonPlanName = 'library-LessonPlan'
 export const lessonPlanSchema = new Schema({
     createdAt:      { type: SchemaTypes.Date, default: null },
     createdBy:      { type: SchemaTypes.Number, default: null },
+    slug:           { type: SchemaTypes.String, default: null },
     subject:        { type: SchemaTypes.ObjectId, ref: SubjectName, default: null },
     cefLevel:      [{ type: SchemaTypes.String, enum: cefLevelEnum, default: null }],
     recomendedAge: [{ type: SchemaTypes.String, enum: recomendedAgeEnum, default: null }],

@@ -5,7 +5,7 @@ import * as _ from 'lodash'
 import {
     LMSContext,
 } from '../../types'
-import * as lmsContextsServices from '../../services/lmsContexts'
+import * as lmsContextsServices from '../../services/lms/lmsContexts'
 
 export const postLMSContexts = async (req: Request) => {
     const {} = req.body

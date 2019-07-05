@@ -1,5 +1,6 @@
 
 import * as Logger from 'bunyan'
+import * as mysql from 'mysql'
 
 // Application/Utils
 
@@ -13,18 +14,22 @@ export type State = {
     out?: any
     idCtx?: IDCtx
     lmsCtx?: LMSCtx
+    userSubscriptionsCtx?: UserSubscriptionsCtx
 }
 
 // Security models
 
 export type PrivacyPolicy = {
-    isPublic: boolean
+    lmsOwner?: string // string|LmsContext
+    isPublic?: boolean
 }
 
 // Contexts
 
 export type IDCtx = {
     userId: number
+    primaryEmailAddress: string
+    emailAddresses: string[]
     virtual?: boolean
 }
 
@@ -37,11 +42,38 @@ export type LMSCtx = {
     teacherId: string
 }
 
+export type UserSubscriptionsCtx = {
+    activeSubscriptionProducts: {
+        skuId: string
+        name: string
+    }[]
+}
+
+// GraphQL type
+
+export type Edges<Edge> = {
+    edges: Edge[]
+    edgesTotal: number
+    pagination: {
+        cursor: string
+        nextCursor: string
+        previousCursor?: string
+    }
+}
+
 // Entities
+
+export type EmailAddress = {
+    id: string
+    email: string
+    userId: number
+    isVerified: boolean
+}
 
 export type LMSContextMembership = {
     _id?: string
-    userId: number
+    emailAddress: string
+    //userId: number
     role: LMSContextMembershipRole
     context: string // string|Context
     teacher: string // string|Teacher
@@ -167,6 +199,10 @@ export type Lesson = {
 }
 
 // Enums
+
+export enum ProductName {
+    libraryNoLimit = 'LIBRARY_NO_LIMIT',
+}
 
 export enum LMSContextMembershipRole {
     student = 'student',

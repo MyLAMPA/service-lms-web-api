@@ -16,7 +16,7 @@ import { locationEquipment, locationEquipments } from './locationEquipment'
 import { schoolYears } from './schoolYears'
 import { student, students } from './student'
 import { teacher, teachers } from './teacher'
-import * as lmsContextServices from '../../../../services/lmsContexts'
+import * as lmsContextServices from '../../../../services/lms/lmsContexts'
 
 export const lms = {
     type: new GraphQLObjectType({

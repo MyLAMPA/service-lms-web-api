@@ -11,11 +11,14 @@ import {
 import * as _ from 'lodash'
 
 export const Model = new GraphQLObjectType({
-    name: 'Identity_User',
+    name: 'User',
     fields: {
         id: {
             type: GraphQLInt,
             resolve: user => _.isNil(user.id) ? null : user.id,
+        },
+        username: {
+            type: GraphQLString,
         },
         email: {
             type: GraphQLString,
@@ -33,6 +36,9 @@ export const Model = new GraphQLObjectType({
             type: GraphQLString,
         },
         lastName: {
+            type: GraphQLString,
+        },
+        image: {
             type: GraphQLString,
         },
     },
