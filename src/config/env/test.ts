@@ -7,11 +7,11 @@ export default {
     aws: {
         region: 'eu-central-1',
         dynamoose: {
-            tableNamePrefix: 'alpha-',
+            tableNamePrefix: 'test-',
         },
     },
     mongoose: {
         url: 'mongodb://127.0.0.1:27017/lampa',
-        tablePrefix: 'Alpha-',
+        tablePrefix: 'test-',
     },
 }

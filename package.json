@@ -1,6 +1,6 @@
 {
-  "name": "service-lms-web-api",
-  "version": "0.0.0",
+  "name": "service-core-web-api",
+  "version": "1.0.0",
   "description": "",
   "license": "MIT",
   "author": {

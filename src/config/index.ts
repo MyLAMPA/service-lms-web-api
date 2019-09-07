@@ -14,7 +14,7 @@ const defaultConfig: Config = {
     },
     log: {
         bunyan: {
-            name: 'service-lms-web-api',
+            name: 'service-core-web-api',
         },
     },
     server: {
