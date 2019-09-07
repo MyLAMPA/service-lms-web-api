@@ -63,10 +63,15 @@ export type AWSConfig = {
     secretAccessKey: string
     region: string
     dynamodb: AWSDynamoDB
+    s3: AWSS3Config
 }
 
 export interface AWSDynamoDB {
     tableNamePrefix: string
+}
+
+export interface AWSS3Config {
+    bucket: string
 }
 
 export type MongooseConfig = {

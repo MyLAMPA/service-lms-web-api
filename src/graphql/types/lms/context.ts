@@ -49,7 +49,7 @@ export const Model = new GraphQLObjectType({
             async resolve({ contextId, role }: LMSCtx, {}, { state }: Request) {
                 let subscriptions = []
 
-                if (state.lmsCtx.role === LMSContextMembershipRole.admin) {
+                if (state.lmsCtx.role === LMSContextMembershipRole.freelancer || state.lmsCtx.role === LMSContextMembershipRole.admin) {
                     subscriptions = await subscriptionsServices.getSubscriptionsByLmsContext(contextId, state)
                 }
 

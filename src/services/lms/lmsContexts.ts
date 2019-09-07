@@ -37,7 +37,7 @@ export async function resolveLMSContextFromMembership(lmsContextMembershipId: st
 
     return {
         userId,
-        contextId: String(lmsContextMembership.context),
+        contextId: String(lmsContextMembership.lmsContext),
         role: lmsContextMembership.role,
         membershipId: String(lmsContextMembership._id),
         studentId: null,

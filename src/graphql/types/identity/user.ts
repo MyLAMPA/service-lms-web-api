@@ -10,6 +10,11 @@ import {
 } from 'graphql'
 import * as _ from 'lodash'
 
+import {
+    Model as ImageModel,
+} from '../image'
+import * as imagesServices from '../../../services/images'
+
 export const Model = new GraphQLObjectType({
     name: 'User',
     fields: {
@@ -28,9 +33,8 @@ export const Model = new GraphQLObjectType({
         },
         fullName: {
             type: GraphQLString,
-            async resolve(user) {
-                return `${user.firstName} ${user.lastName}`
-            },
+            resolve: async(user) =>
+                `${user.firstName} ${user.lastName}`,
         },
         firstName: {
             type: GraphQLString,
@@ -38,8 +42,18 @@ export const Model = new GraphQLObjectType({
         lastName: {
             type: GraphQLString,
         },
-        image: {
-            type: GraphQLString,
+        profileImage: {
+            type: ImageModel,
+            resolve: async(user, {}, { state }: Request) => {
+                if (typeof user.profileImage === 'string') {
+                    const image = await imagesServices.getImageById(user.profileImage, state)
+                    return image
+                }
+                if (!_.isEmpty(user.profileImage)) {
+                    return user.profileImage
+                }
+                return null
+            },
         },
     },
 })

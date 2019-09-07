@@ -12,7 +12,7 @@ import { LocationName } from './location'
 import { TeacherName } from './teacher'
 import { StudentName } from './student'
 
-export const LessonName = 'Lesson'
+export const LessonName = 'lms-Lesson'
 
 const lessonSchema = new Schema({
     context:        { type: SchemaTypes.ObjectId, ref: LMSContextName, default: null },

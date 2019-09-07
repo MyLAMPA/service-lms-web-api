@@ -12,7 +12,7 @@ import { lmsContextMembershipSchema, LMSContextMembershipName } from './schemas/
 const lmsContextMembershipsCollection = source.collection<LMSContextMembership>(
     LMSContextMembershipName,
     lmsContextMembershipSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lmscontextmemberships`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-lmscontextmemberships`
 )
 
 export async function getLMSContextMemberships(params: object, populateContext: boolean, state: State): Promise<LMSContextMembership[]> {

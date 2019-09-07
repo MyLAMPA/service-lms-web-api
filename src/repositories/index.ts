@@ -1,4 +1,5 @@
 
+
 // Library context
 
 export {
@@ -32,6 +33,7 @@ import * as locationEquipmentsRepository from './mongo/locationEquipments'
 import * as locationsRepository from './mongo/locations'
 import * as studentsRepository from './mongo/students'
 import * as teachersRepository from './mongo/teachers'
+import * as imagesRepository from './mongo/images'
 
 export { lmsContextsRepository }
 export { lmsContextMembershipsRepository }
@@ -44,6 +46,7 @@ export { locationEquipmentsRepository }
 export { locationsRepository }
 export { studentsRepository }
 export { teachersRepository }
+export { imagesRepository }
 
 
 import * as libraryRepositories from './library'

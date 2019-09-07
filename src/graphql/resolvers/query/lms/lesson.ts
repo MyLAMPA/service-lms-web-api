@@ -3,6 +3,7 @@ import { Request } from 'express'
 import {
     GraphQLList,
     GraphQLString,
+    GraphQLNonNull,
 } from 'graphql'
 import * as _ from 'lodash'
 import * as moment from 'moment'
@@ -33,16 +34,15 @@ export const lesson = {
 export const lessons = {
     type: new GraphQLList(LessonModel),
     args: {
-        dateFrom: {
-            type: GraphQLString,
+        timeframeStart: {
+            type: new GraphQLNonNull(GraphQLString),
         },
-        dateTo: {
-            type: GraphQLString,
+        timeframeEnd: {
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
-    async resolve({ role, teacherId, studentId, contextId: context }: LMSCtx, { dateFrom, dateTo }, { state }: Request) {
+    async resolve({ role, teacherId, studentId, contextId: context }: LMSCtx, { timeframeStart, timeframeEnd }, { state }: Request) {
         const searchParams: any = { context }
-
         switch (role) {
             case LMSContextMembershipRole.teacher:
                 searchParams.teachers = { $in: [teacherId] }
@@ -52,11 +52,11 @@ export const lessons = {
                 break
         }
 
-        if (!_.isNil(dateFrom)) {
-            searchParams.end = { $gte: moment(dateFrom).toDate() }
+        if (!_.isNil(timeframeStart)) {
+            searchParams.end = { $gte: moment(timeframeStart).toDate() }
         }
-        if (!_.isNil(dateTo)) {
-            searchParams.start = { $lt: moment(dateTo).toDate() }
+        if (!_.isNil(timeframeEnd)) {
+            searchParams.start = { $lt: moment(timeframeEnd).toDate() }
         }
 
         const lessons = await lessonsServices.getLessons(searchParams, state)

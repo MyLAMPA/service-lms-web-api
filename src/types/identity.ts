@@ -7,5 +7,5 @@ export interface User {
     sex?: 'male'|'female'
     firstName: string
     lastName: string
-    image: string
+    profileImage: string
 }

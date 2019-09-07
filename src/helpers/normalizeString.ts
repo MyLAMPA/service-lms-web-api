@@ -32,14 +32,19 @@ const replacements = {
     'ž': 'z', 'Ž': 'Z'
 }
 
-export function normalizeString(input: any, spaceReplacement: string = '_') {
+export const normalizeString = (
+    input: any,
+    spaceReplacement: string = '_',
+    additionalAllowed: string[] = [],
+): string => {
     input = String(input)
     const output = ['']
 
     for (const i in input) {
         if (input[i] == ' ') {
             output.push(spaceReplacement || '_')
-        } else if ((<any>allowed).includes(input[i])) {
+        } else if ((<any>allowed).includes(input[i])
+            || (<any>additionalAllowed).includes(input[i])) {
             output.push(String(input[i]))
         } else if (replacements[input[i]]) {
             output.push(replacements[input[i]])

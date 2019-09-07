@@ -29,7 +29,7 @@ export const user = {
             'name',
             'firstName',
             'lastName',
-            'image',
+            'profileImage',
         ])
     },
 }

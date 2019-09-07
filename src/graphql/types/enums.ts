@@ -34,6 +34,9 @@ export const LMSContextModeEnum = new GraphQLEnumType({
 export const LMSContextMembershipRoleEnum = new GraphQLEnumType({
     name: 'LMSContextMembershipRole',
     values: {
+        freelancer: {
+            value: 'freelancer',
+        },
         student: {
             value: 'student',
         },

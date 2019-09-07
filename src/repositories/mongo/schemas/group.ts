@@ -5,7 +5,7 @@ import { LMSContextName } from './lmsContext'
 import { CourseName } from './course'
 import { StudentName } from './student'
 
-export const GroupName = 'Group'
+export const GroupName = 'lms-Group'
 
 const groupSchema = new Schema({
     context:     { type: SchemaTypes.ObjectId, ref: LMSContextName, required: true },

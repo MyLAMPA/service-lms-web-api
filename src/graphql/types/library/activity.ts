@@ -20,7 +20,7 @@ import {
 import {
     Model as TagModel,
     CreateModel as TagCreateModel,
-} from './tag'
+} from '../tag'
 
 export const Model = new GraphQLObjectType({
     name: 'Library_Activity',

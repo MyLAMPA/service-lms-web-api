@@ -12,7 +12,7 @@ import { locationEquipmentSchema, LocationEquipmentName } from './schemas/locati
 const locationEquipmentsCollection = source.collection<LocationEquipment>(
     LocationEquipmentName,
     locationEquipmentSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}locationequipments`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-locationequipments`
 )
 
 export async function getLocationEquipments(params: object, state: State): Promise<LocationEquipment[]> {

@@ -16,14 +16,14 @@ const lessonPlansCollection = source.collection<LessonPlan>(
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}library-lessonplans`
 )
 
-export async function getLessonPlans(params: object, state: State) {
+export const getLessonPlans = async(params: object, state: State) => {
     const lessonPlans = await lessonPlansCollection.find(params)
     return lessonPlans
         .filter(lessonPlan => !_.isEmpty(lessonPlan))
         .map(lessonPlan => <LessonPlan>lessonPlan)
 }
 
-export async function getLessonPlanById(lessonPlanId: string, state: State): Promise<LessonPlan> {
+export const getLessonPlanById = async(lessonPlanId: string, state: State): Promise<LessonPlan> => {
     const lessonPlan = await lessonPlansCollection.findById(lessonPlanId)
     if (!_.isEmpty(lessonPlan)) {
         return lessonPlan
@@ -31,11 +31,35 @@ export async function getLessonPlanById(lessonPlanId: string, state: State): Pro
     return null
 }
 
-export async function createLessonPlan(document: LessonPlan, state: State): Promise<LessonPlan> {
+export const getLessonPlanByIdPopulated = async(lessonPlanId: string, state: State): Promise<LessonPlan> => {
+    const lessonPlan = await lessonPlansCollection.findById(lessonPlanId).populate('activities')
+    if (!_.isEmpty(lessonPlan)) {
+        return lessonPlan
+    }
+    return null
+}
+
+export const getLessonPlanBySlug = async(lessonPlanSlug: string, state: State) => {
+    const lessonPlan = await lessonPlansCollection.findOne({ slug: lessonPlanSlug })
+    if (!_.isEmpty(lessonPlan)) {
+        return lessonPlan
+    }
+    return null
+}
+
+export const getLessonPlanBySlugPopulated = async(lessonPlanSlug: string, state: State) => {
+    const lessonPlan = await lessonPlansCollection.findOne({ slug: lessonPlanSlug }).populate('activities')
+    if (!_.isEmpty(lessonPlan)) {
+        return lessonPlan
+    }
+    return null
+}
+
+export const createLessonPlan = async(document: LessonPlan, state: State): Promise<LessonPlan> => {
     const createdLessonPlan = await lessonPlansCollection.create(document)
     return createdLessonPlan
 }
 
-export async function updateLessonPlanById(lessonPlanId: string, change: object, state: State): Promise<void> {
+export const updateLessonPlanById = async(lessonPlanId: string, change: object, state: State): Promise<void> => {
     await lessonPlansCollection.findByIdAndUpdate(lessonPlanId, change)
 }

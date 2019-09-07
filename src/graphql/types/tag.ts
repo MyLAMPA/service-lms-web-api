@@ -13,7 +13,7 @@ import {
 } from 'graphql'
 
 export const Model = new GraphQLObjectType({
-    name: 'Library_Tag',
+    name: 'Tag',
     fields: {
         key: {
             type: GraphQLString,
@@ -28,7 +28,7 @@ export const Model = new GraphQLObjectType({
 })
 
 export const CreateModel = new GraphQLInputObjectType({
-    name: 'Library_Tag_Create',
+    name: 'Tag_Create',
     fields: {
         key: {
             type: new GraphQLNonNull(GraphQLString),

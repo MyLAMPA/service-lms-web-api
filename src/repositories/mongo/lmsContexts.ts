@@ -13,7 +13,7 @@ import { lmsContextSchema, LMSContextName } from './schemas/lmsContext'
 const lmsContextsCollection = source.collection<LMSContext>(
     LMSContextName,
     lmsContextSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lmscontexts`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-lmscontexts`
 )
 
 export async function getLMSContextById(lmsContextId: string, state: State): Promise<LMSContext> {

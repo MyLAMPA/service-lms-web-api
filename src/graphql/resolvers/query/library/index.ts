@@ -5,14 +5,14 @@ import {
     GraphQLString,
 } from 'graphql'
 
-import { lessonPlan, lessonPlans } from './lessonPlan'
+import { lessonPlan, searchMyLessonPlans } from './lessonPlan'
 import { activity, searchMyActivities, searchActivities } from './activity'
 
 export const library = {
     type: new GraphQLObjectType({
         name: 'Library_Context',
         fields: {
-            lessonPlan, lessonPlans,
+            lessonPlan, lessonPlans: searchMyLessonPlans,
             activity, searchMyActivities, searchActivities,
         },
     }),

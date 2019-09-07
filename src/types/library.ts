@@ -34,6 +34,8 @@ export interface LessonPlan {
 
 export interface Document {
     json: string
+    text?: string
+    html?: string
 }
 
 export interface Activity {

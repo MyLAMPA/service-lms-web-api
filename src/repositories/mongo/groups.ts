@@ -12,7 +12,7 @@ import { groupSchema, GroupName } from './schemas/group'
 const groupsCollection = source.collection<Group>(
     GroupName,
     groupSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}groups`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-groups`
 )
 
 export async function getGroups(params: object, populateCourse: boolean, state: State) {

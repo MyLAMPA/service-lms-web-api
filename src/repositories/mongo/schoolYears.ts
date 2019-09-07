@@ -12,7 +12,7 @@ import { schoolYearSchema, SchoolYearName } from './schemas/schoolYear'
 const schoolYearsCollection = source.collection<SchoolYear>(
     SchoolYearName,
     schoolYearSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}schoolyears`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-schoolyears`
 )
 
 export async function getSchoolYears(params: object, state: State): Promise<SchoolYear[]> {

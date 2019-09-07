@@ -54,15 +54,20 @@ export const authorizeUserRequest = async (req: Request, res: Response, next: Ne
             }
     
             const credentials: string = authorizationHeader.split(' ')[1]
-            const { userId } = await <IDCtx>jwt.verify(credentials, config.auth.accessTokenSecret)
+            const { userId, primaryEmailAddress, emailAddresses } = await <IDCtx>jwt.verify(credentials, config.auth.accessTokenSecret)
     
-            req.state.idCtx = { userId }
+            req.state.idCtx = { userId, primaryEmailAddress, emailAddresses }
 
             return next()
         }
 
         if (config.auth.enablePublicReadProxy) {
-            req.state.idCtx = { userId: null, virtual: true }
+            req.state.idCtx = {
+                virtual: true,
+                userId: null,
+                primaryEmailAddress: null,
+                emailAddresses: null,
+            }
             return next()
         }
 
@@ -75,7 +80,7 @@ export const authorizeUserRequest = async (req: Request, res: Response, next: Ne
 
 export const handleController =
     (controller: (req?: Request, res?: Response) => any, useStandardHandler: boolean = true) =>
-        async (req: Request, res: Response, next: NextFunction) => {
+        async(req: Request, res: Response, next: NextFunction) => {
             try {
                 req.state.out = await controller(req, res)
                 if (useStandardHandler) {

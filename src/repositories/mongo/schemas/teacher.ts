@@ -3,7 +3,7 @@ import { Schema, SchemaTypes } from 'mongoose'
 
 import { LMSContextName } from './lmsContext'
 
-export const TeacherName = 'Teacher'
+export const TeacherName = 'lms-Teacher'
 
 const teacherSchema = new Schema({
     context:   { type: SchemaTypes.ObjectId, ref: LMSContextName, required: true },

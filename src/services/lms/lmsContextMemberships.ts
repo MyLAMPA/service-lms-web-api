@@ -11,7 +11,7 @@ import { lmsContextMembershipsRepository } from '../../repositories'
 
 export async function getCurrentUserActiveMemberships(state: State): Promise<LMSContextMembership[]> {
     const { emailAddresses } = state.idCtx
-    const query = { emailAddress: { $in: emailAddresses } }
+    const query = { isActive: true, emailAddress: { $in: emailAddresses } }
     const contextMemberships = await lmsContextMembershipsRepository.getLMSContextMemberships(query, true, state)
     return contextMemberships
 }

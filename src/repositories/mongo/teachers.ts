@@ -12,7 +12,7 @@ import { teacherSchema, TeacherName } from './schemas/teacher'
 const teachersCollection = source.collection<Teacher>(
     TeacherName,
     teacherSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}teachers`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-teachers`
 )
 
 export async function getTeachers(params: object, state: State): Promise<Teacher[]> {

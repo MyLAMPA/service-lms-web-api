@@ -18,7 +18,7 @@ const userReadFields = [
     'primaryEmailAddress',
     'firstName', 'lastName',
     'birthDate', 'sex',
-    'image',
+    'profileImage',
 ]
 
 export async function getUserById(userId: number, state: State): Promise<User> {
@@ -76,7 +76,7 @@ export async function updateUser(userId: number, user: Partial<User>, state: Sta
             birthDate: null,
             sex: null,
         },
-        _.pick(user, ['credentials', 'username', 'primaryEmailAddress', 'firstName', 'lastName', 'fullName', 'birthDate', 'sex', 'image'])
+        _.pick(user, ['credentials', 'username', 'primaryEmailAddress', 'firstName', 'lastName', 'fullName', 'birthDate', 'sex', 'profileImage'])
     )
 
     const change: { field: string; value: string; }[] = []
@@ -101,8 +101,8 @@ export async function updateUser(userId: number, user: Partial<User>, state: Sta
     if (typeof _user.sex === 'string') {
         change.push({ field: 'sex', value: `"${_user.sex}"` })
     }
-    if (typeof _user.image === 'string') {
-        change.push({ field: 'image', value: `"${_user.image}"` })
+    if (typeof _user.profileImage === 'string') {
+        change.push({ field: 'profileImage', value: `"${_user.profileImage}"` })
     }
 
     const query = new SQLQuery<{ insertId: number }>(`

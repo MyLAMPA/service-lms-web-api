@@ -12,7 +12,7 @@ import { locationSchema, LocationName } from './schemas/location'
 const locationsCollection = source.collection<Location>(
     LocationName,
     locationSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}locations`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-locations`
 )
 
 export async function getLocations(params: object, state: State): Promise<Location[]> {

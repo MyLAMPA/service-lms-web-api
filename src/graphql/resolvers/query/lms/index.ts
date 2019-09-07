@@ -3,6 +3,7 @@ import { Request } from 'express'
 import {
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
 } from 'graphql'
 
 import { httpErrors } from '../../../../errors'
@@ -39,7 +40,7 @@ export const lms = {
     }),
     args: {
         membership: {
-            type: GraphQLString,
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
     async resolve(source, { membership: membershipId }, { state }: Request) {

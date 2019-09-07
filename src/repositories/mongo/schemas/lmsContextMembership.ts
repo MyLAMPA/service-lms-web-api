@@ -8,9 +8,10 @@ import { LMSContextName } from './lmsContext'
 import { StudentName } from './student'
 import { TeacherName } from './teacher'
 
-export const LMSContextMembershipName = 'LMSContextMembership'
+export const LMSContextMembershipName = 'lms-LMSContextMembership'
 
 const lmsContextMembershipRoleEnum = [
+    LMSContextMembershipRole.freelancer,
     LMSContextMembershipRole.student,
     LMSContextMembershipRole.teacher,
     LMSContextMembershipRole.admin,

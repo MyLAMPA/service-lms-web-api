@@ -44,11 +44,14 @@ const defaultConfig: Config = {
         dynamodb: {
             tableNamePrefix: 'notSet',
         },
+        s3: {
+            bucket: 'notSet',
+        },
     },
     mongoose: {
         uri: 'mongodb://127.0.0.1:27017',
         db: 'lampa',
-        tablePrefix: '',
+        tablePrefix: null,
     },
     elasticSearch: {
         host: 'notSet',
@@ -99,6 +102,6 @@ if (fs.existsSync(environmentConfigPath)) {
     environmentConfig = require(environmentConfigPath).default
 }
 
-const config: Config = _.merge(defaultConfig, environmentConfig, envConfig)
+const config: Config = _.merge(defaultConfig, environmentConfig, envConfig, { configEnv: 'test' })
 
 export { config }

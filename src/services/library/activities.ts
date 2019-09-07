@@ -14,6 +14,7 @@ import {
 import {
     Activity,
 } from '../../types/library'
+import { Document } from '../../components/document'
 import { Pagination } from '../../helpers/pagination'
 import { normalizeString } from '../../helpers/normalizeString'
 import { libraryRepositories } from '../../repositories'
@@ -81,13 +82,13 @@ export const slugifyActivityTitle = async(title: string, state: State): Promise<
     return `${base}-${Math.round(Math.random() * 10000)}`
 }
 
-export const createActivity = async(activity: Partial<Activity>, state: State): Promise<Activity> => {
+export const createActivity = async(activity: Partial<Activity>, procedureDocument: Document, state: State): Promise<Activity> => {
     const slug = await slugifyActivityTitle(_.get(activity, 'title'), state)
     const document = _.merge(
         {},
         { slug: null, privacyPolicy: { isPublic: true } },
         { duration: null, isRepeatable: true, tags: [] },
-        { procedure: { json: null } },
+        { procedure: { json: procedureDocument.json, text: procedureDocument.text } },
         activity,
         { slug },
         { createdAt: new Date(), createdBy: state.idCtx.userId }
@@ -102,7 +103,19 @@ export const createActivity = async(activity: Partial<Activity>, state: State): 
 }
 
 export const updateActivity = async(activityId: string, activity: Partial<Activity>, state: State): Promise<void> => {
-    await activitiesRepository.setOnActivity(activityId, _.pick(activity, ['title', 'procedure', 'duration', 'isRepeatable']), state)
+    await activitiesRepository.setOnActivity(
+        activityId,
+        _.pick(activity, ['title', 'duration', 'isRepeatable']),
+        state,
+    )
+}
+
+export const updateActivityProcedure = async(activityId: string, procedureDocument: Document, state: State): Promise<void> => {
+    await activitiesRepository.setOnActivity(
+        activityId,
+        { procedure: { json: procedureDocument.json, text: procedureDocument.text } },
+        state,
+    )
 }
 
 export const verifyPrivateActivityEligibility = async(state: State): Promise<void> => {

@@ -2,13 +2,15 @@
 import slugify from 'slugify'
 import * as _ from 'lodash'
 
-import { httpErrors as errors, httpErrors } from '../../errors'
+import { httpErrors } from '../../errors'
 import {
     State,
 } from '../../types'
 import {
     LessonPlan,
+    Activity,
 } from '../../types/library'
+import { Pagination } from '../../helpers/pagination'
 import { normalizeString } from '../../helpers/normalizeString'
 import { lessonPlansRepository } from '../../repositories'
 
@@ -21,5 +23,29 @@ export const getLessonPlanById = async(lessonPlanId: string, state: State): Prom
     if (lessonPlan) {
         return lessonPlan
     }
-    throw errors.notFound('LessonPlan Not Found')
+    throw httpErrors.notFound('LessonPlan Not Found')
+}
+
+export const getLessonPlanByIdPopulated = async(lessonPlanId: string, state: State): Promise<LessonPlan> => {
+    const lessonPlan = await lessonPlansRepository.getLessonPlanByIdPopulated(lessonPlanId, state)
+    if (lessonPlan) {
+        return lessonPlan
+    }
+    throw httpErrors.notFound('LessonPlan Not Found')
+}
+
+export const getLessonPlanBySlug = async(lessonPlanSlug: string, state: State): Promise<LessonPlan> => {
+    const lessonPlan = await lessonPlansRepository.getLessonPlanBySlug(lessonPlanSlug, state)
+    if (lessonPlan) {
+        return lessonPlan
+    }
+    throw httpErrors.notFound('LessonPlan Not Found')
+}
+
+export const getLessonPlanBySlugPopulated = async(lessonPlanSlug: string, state: State): Promise<LessonPlan> => {
+    const lessonPlan = await lessonPlansRepository.getLessonPlanBySlugPopulated(lessonPlanSlug, state)
+    if (lessonPlan) {
+        return lessonPlan
+    }
+    throw httpErrors.notFound('LessonPlan Not Found')
 }

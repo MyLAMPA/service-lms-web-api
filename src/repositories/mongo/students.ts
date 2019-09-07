@@ -12,7 +12,7 @@ import { studentSchema, StudentName } from './schemas/student'
 const studentsCollection = source.collection<Student>(
     StudentName,
     studentSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}students`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-students`
 )
 
 export async function getStudents(params: object, state: State): Promise<Student[]> {

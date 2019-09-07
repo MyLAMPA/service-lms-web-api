@@ -3,11 +3,13 @@ import { Schema, SchemaTypes } from 'mongoose'
 import * as mongoosastic from 'mongoosastic'
 
 import { client as esClient } from '../../../../components/elasticsearch'
+import { elasticEntityType } from '../../../../enums'
 
 export const ActivityName = 'library-Activity'
 
 const documentSchema = {
     json: { type: SchemaTypes.String },
+    text: { type: SchemaTypes.String, default: null },
 }
 
 const activitySchema = new Schema({
@@ -28,6 +30,10 @@ const activitySchema = new Schema({
     }],
 })
 
-activitySchema.plugin(mongoosastic, { esClient, hydrate: false })
+activitySchema.plugin(mongoosastic, {
+    esClient,
+    type: elasticEntityType.activity,
+    hydrate: false,
+})
 
 export { activitySchema }

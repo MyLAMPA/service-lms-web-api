@@ -31,7 +31,7 @@ export async function createStudent(student: Student, email: string, state: Stat
     if (email) {
         const { id: emailAddressId } = await emailAddressesServices.getOrCreateByEmail(email, state)
         await lmsContextMembershipsServices.createLMSContextMembership({
-            context: state.lmsCtx.contextId,
+            lmsContext: state.lmsCtx.contextId,
             role: LMSContextMembershipRole.student,
             emailAddress: emailAddressId,
             teacher: null,

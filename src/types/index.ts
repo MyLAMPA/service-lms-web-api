@@ -70,12 +70,31 @@ export type EmailAddress = {
     isVerified: boolean
 }
 
+export type Image = {
+    _id: string
+    createdAt: Date
+    createdBy: number
+    file: {
+        key?: string
+        fileKey: string
+    }
+    title?: string
+    description?: string
+    tags?: {
+        key: string
+        name?: string
+        text: string
+    }[]
+}
+
+
+
 export type LMSContextMembership = {
     _id?: string
     emailAddress: string
     //userId: number
     role: LMSContextMembershipRole
-    context: string // string|Context
+    lmsContext: string // string|Context
     teacher: string // string|Teacher
     student: string // string|Student
 }
@@ -200,11 +219,16 @@ export type Lesson = {
 
 // Enums
 
+export enum BucketFolder {
+    images = 'images',
+}
+
 export enum ProductName {
     libraryNoLimit = 'LIBRARY_NO_LIMIT',
 }
 
 export enum LMSContextMembershipRole {
+    freelancer = 'freelancer',
     student = 'student',
     teacher = 'teacher',
     admin = 'admin',

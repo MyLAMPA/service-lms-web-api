@@ -8,7 +8,7 @@ import {
 import * as _ from 'lodash'
 
 import { httpErrors } from '../../../../errors'
-import { ProseMirrorDocument } from '../../../../components/proseMirror/document'
+import { Document } from '../../../../components/document'
 import {
     IDCtx,
 } from '../../../../types'
@@ -31,13 +31,16 @@ export const createActivity = {
             throw httpErrors.unauthorized()
         }
 
+        const { procedure, ...rest } = activity
+
+        let procedureDocument
         try {
-            const doc = await ProseMirrorDocument.ValidateJson(activity.procedure.json)
+            procedureDocument = Document.ParseProseMirrorJson(procedure.json)
         } catch (err) {
             throw httpErrors.badRequest('activity.procedure.json is not valid ProseMirror document')
         }
 
-        const createdActivity = await activitiesServices.createActivity(activity, state)
+        const createdActivity = await activitiesServices.createActivity(rest, procedureDocument, state)
         return createdActivity
     },
 }
@@ -62,7 +65,19 @@ export const updateActivity = {
             throw httpErrors.unauthorized()
         }
 
-        await activitiesServices.updateActivity(activityId, activity, state)
+        const { procedure, ...rest } = activity
+        if (procedure) {
+            let procedureDocument
+            try {
+                procedureDocument = Document.ParseProseMirrorJson(procedure.json)
+            } catch (err) {
+                throw httpErrors.badRequest('activity.procedure.json is not valid ProseMirror document')
+            }
+            await activitiesServices.updateActivityProcedure(activityId, procedureDocument, state)
+        }
+        if (!_.isEmpty(rest)) {
+            await activitiesServices.updateActivity(activityId, rest, state)
+        }
 
         return await activitiesServices.getActivityById(activityId, state)
     },

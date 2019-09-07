@@ -299,12 +299,12 @@ export const Model = new GraphQLObjectType({
         // teachersNotes: {
         //     type: new GraphQLList(TeachersNoteModel),
         // },
-        chat: {
-            type: ChatContext,
-            async resolve(lesson, {}, { state }: Request) {
-                return { ctxType: 'lesson', ctxId: lesson._id }
-            },
-        },
+        // chat: {
+        //     type: ChatContext,
+        //     async resolve(lesson, {}, { state }: Request) {
+        //         return { ctxType: 'lesson', ctxId: lesson._id }
+        //     },
+        // },
         notes: {
             type: GraphQLString,
         },

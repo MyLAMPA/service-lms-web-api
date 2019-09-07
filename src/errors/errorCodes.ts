@@ -13,6 +13,9 @@ export const errorCodes = {
     paymentsErrors: {
         defaultSourceMissing: 404501,
     },
+    core: {
+        imageNotFound: 700101,
+    },
     library: {
         activityNotFound: 404601,
     },

@@ -12,7 +12,7 @@ import { lessonSchema, LessonName } from './schemas/lesson'
 const lessonsCollection = source.collection<Lesson>(
     LessonName,
     lessonSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lessons`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-lessons`
 )
 
 export async function getLessons(params: object, state: State): Promise<Lesson[]> {

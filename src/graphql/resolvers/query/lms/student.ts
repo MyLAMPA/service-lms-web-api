@@ -22,6 +22,7 @@ export const student = {
     },
     async resolve({ role }: LMSCtx, { id }, { state }: Request) {
         switch (role) {
+            case LMSContextMembershipRole.freelancer:
             case LMSContextMembershipRole.admin:
             case LMSContextMembershipRole.teacher:
             case LMSContextMembershipRole.student:

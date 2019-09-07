@@ -13,7 +13,7 @@ import { homeworkSchema, HomeworkName } from './schemas/homework'
 const homeworksCollection = source.collection<Homework>(
     HomeworkName,
     homeworkSchema,
-    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}homeworks`
+    `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-homeworks`
 )
 
 const withPopulation = (fields: string[]) =>

@@ -7,7 +7,7 @@ import {
 } from '../../../types'
 import { SchoolYearName } from './schoolYear'
 
-export const LMSContextName = 'LMSContext'
+export const LMSContextName = 'lms-LMSContext'
 
 const lmsContextStatusEnum = [
     ContextStatus.freetrial, ContextStatus.active,

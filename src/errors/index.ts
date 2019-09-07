@@ -39,6 +39,8 @@ export const httpErrors = {
 export const authErrors = {
     unknownAuthorizationHeader: (): UnauthorizedError =>
         httpErrors.unauthorized('Unknown Authorization Header - Bearer Credentials Required: "Bearer <credentials>"'),
+    virtualUnauthorized: (): UnauthorizedError =>
+        httpErrors.unauthorized('Unauthorized Request'),
 }
 
 export const registrationErrors = {
@@ -52,6 +54,11 @@ export const registrationErrors = {
 export const credentialsErrors = {
     invalidEmailOrUsername: (): BadRequestError =>
         httpErrors.badRequest('Invalid Email Or Username', errorCodes.credentials.invalidEmailOrUsername),
+}
+
+export const coreErrors = {
+    imageNotFound: (): NotFoundError =>
+        httpErrors.notFound('Image Not Found', errorCodes.core.imageNotFound),
 }
 
 export const libraryErrors = {
