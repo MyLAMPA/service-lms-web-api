@@ -102,6 +102,6 @@ if (fs.existsSync(environmentConfigPath)) {
     environmentConfig = require(environmentConfigPath).default
 }
 
-const config: Config = _.merge(defaultConfig, environmentConfig, envConfig, { configEnv: 'test' })
+const config: Config = _.merge(defaultConfig, environmentConfig, envConfig)
 
 export { config }
