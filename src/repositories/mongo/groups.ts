@@ -7,10 +7,11 @@ import {
     Group,
 } from '../../types'
 import { source } from './source'
-import { groupSchema, GroupName } from './schemas/group'
+import { LmsTableName } from './schemas'
+import { groupSchema } from './schemas/group'
 
 const groupsCollection = source.collection<Group>(
-    GroupName,
+    LmsTableName.group,
     groupSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-groups`
 )

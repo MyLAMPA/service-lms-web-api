@@ -3,10 +3,11 @@ set -e
 
 source ../tools/variables.sh
 
+cd ../..
 docker build \
-#    --build-arg NPM_TOKEN=${NPM_TOKEN} \
     -t $ECR:$PACKAGE_VERSION \
     .
+# --build-arg NPM_TOKEN=${NPM_TOKEN} \
 
 $(aws ecr get-login --region eu-central-1 | sed -e 's/-e none//g')
 

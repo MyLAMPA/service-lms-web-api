@@ -7,10 +7,11 @@ import {
     Location,
 } from '../../types'
 import { source } from './source'
-import { locationSchema, LocationName } from './schemas/location'
+import { LmsTableName } from './schemas'
+import { locationSchema } from './schemas/location'
 
 const locationsCollection = source.collection<Location>(
-    LocationName,
+    LmsTableName.location,
     locationSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-locations`
 )

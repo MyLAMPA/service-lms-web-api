@@ -7,10 +7,11 @@ import {
     Teacher,
 } from '../../types'
 import { source } from './source'
-import { teacherSchema, TeacherName } from './schemas/teacher'
+import { LmsTableName } from './schemas'
+import { teacherSchema } from './schemas/teacher'
 
 const teachersCollection = source.collection<Teacher>(
-    TeacherName,
+    LmsTableName.teacher,
     teacherSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-teachers`
 )

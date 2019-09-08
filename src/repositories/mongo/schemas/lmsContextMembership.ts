@@ -4,11 +4,7 @@ import { Schema, SchemaTypes } from 'mongoose'
 import {
     LMSContextMembershipRole,
 } from '../../../types'
-import { LMSContextName } from './lmsContext'
-import { StudentName } from './student'
-import { TeacherName } from './teacher'
-
-export const LMSContextMembershipName = 'lms-LMSContextMembership'
+import { LmsTableName } from '.'
 
 const lmsContextMembershipRoleEnum = [
     LMSContextMembershipRole.freelancer,
@@ -22,9 +18,9 @@ const lmsContextMembershipSchema = new Schema({
     emailAddress: { type: SchemaTypes.String, required: true },
     // userId:      { type: SchemaTypes.Number, required: true },
     role:         { type: SchemaTypes.String, enum: lmsContextMembershipRoleEnum, required: true },
-    lmsContext:   { type: SchemaTypes.ObjectId, ref: LMSContextName, required: true },
-    student:      { type: SchemaTypes.ObjectId, ref: StudentName, default: null },
-    teacher:      { type: SchemaTypes.ObjectId, ref: TeacherName, default: null },
+    lmsContext:   { type: SchemaTypes.ObjectId, ref: LmsTableName.lmsContext, required: true },
+    student:      { type: SchemaTypes.ObjectId, ref: LmsTableName.student, default: null },
+    teacher:      { type: SchemaTypes.ObjectId, ref: LmsTableName.teacher, default: null },
 })
 
 export { lmsContextMembershipSchema }

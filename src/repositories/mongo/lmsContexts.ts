@@ -8,10 +8,11 @@ import {
     ContextStatus,
 } from '../../types'
 import { source } from './source'
-import { lmsContextSchema, LMSContextName } from './schemas/lmsContext'
+import { LmsTableName } from './schemas'
+import { lmsContextSchema } from './schemas/lmsContext'
 
 const lmsContextsCollection = source.collection<LMSContext>(
-    LMSContextName,
+    LmsTableName.lmsContext,
     lmsContextSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-lmscontexts`
 )

@@ -1,6 +1,8 @@
 
 import * as _ from 'lodash'
-import { CastError } from 'mongoose'
+import { Error } from 'mongoose'
+
+const { CastError } = Error
 
 import { config } from '../../../config'
 import { httpErrors } from '../../../errors'

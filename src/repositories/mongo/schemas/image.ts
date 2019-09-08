@@ -5,8 +5,6 @@ import * as mongoosastic from 'mongoosastic'
 import { client as esClient } from '../../../components/elasticsearch'
 import { elasticEntityType } from '../../../enums'
 
-export const ImageName = 'lms-Image'
-
 const fileSchema = {
     key:     { type: SchemaTypes.String, default: null },
     fileKey: { type: SchemaTypes.String, required: true, es_indexed: true, es_type: 'string' },

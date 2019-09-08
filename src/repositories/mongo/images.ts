@@ -1,6 +1,8 @@
 
 import * as _ from 'lodash'
-import { CastError } from 'mongoose'
+import { Error } from 'mongoose'
+
+const { CastError } = Error
 
 import { config } from '../../config'
 import { httpErrors } from '../../errors'
@@ -11,10 +13,11 @@ import {
 } from '../../types'
 import { source } from './source'
 import { makeElasticQueryOnCollection } from '../../components/elasticsearch'
-import { imageSchema, ImageName } from './schemas/image'
+import { LmsTableName } from './schemas'
+import { imageSchema } from './schemas/image'
 
 const imagesCollection = source.collection<Image>(
-    ImageName,
+    LmsTableName.image,
     imageSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-images`
 )

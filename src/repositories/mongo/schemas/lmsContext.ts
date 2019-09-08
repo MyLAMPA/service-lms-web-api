@@ -5,9 +5,7 @@ import {
     ContextStatus,
     ContextMode,
 } from '../../../types'
-import { SchoolYearName } from './schoolYear'
-
-export const LMSContextName = 'lms-LMSContext'
+import { LmsTableName } from '.'
 
 const lmsContextStatusEnum = [
     ContextStatus.freetrial, ContextStatus.active,
@@ -35,7 +33,7 @@ const lmsContextSchema = new Schema({
     abbr:                  { type: SchemaTypes.String, default: null },
     externalWebUrl:        { type: SchemaTypes.String, default: null },
     defaultLessonDuration: { type: SchemaTypes.Number, default: 45 },
-    currentSchoolYear:     { type: SchemaTypes.ObjectId, ref: SchoolYearName, default: null },
+    currentSchoolYear:     { type: SchemaTypes.ObjectId, ref: LmsTableName.schoolYear, default: null },
 })
 
 export { lmsContextSchema }

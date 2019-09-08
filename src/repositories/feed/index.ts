@@ -1,6 +1,6 @@
 
 // MongoDB repositories
 
-import * as postsRepository from './mongo/posts'
+//import * as postsRepository from './mongo/posts'
 
-export { postsRepository }
+//export { postsRepository }

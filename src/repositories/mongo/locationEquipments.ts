@@ -7,10 +7,11 @@ import {
     LocationEquipment,
 } from '../../types'
 import { source } from './source'
-import { locationEquipmentSchema, LocationEquipmentName } from './schemas/locationEquipment'
+import { LmsTableName } from './schemas'
+import { locationEquipmentSchema } from './schemas/locationEquipment'
 
 const locationEquipmentsCollection = source.collection<LocationEquipment>(
-    LocationEquipmentName,
+    LmsTableName.locationEquipment,
     locationEquipmentSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-locationequipments`
 )

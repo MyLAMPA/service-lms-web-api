@@ -7,10 +7,11 @@ import {
     LMSContextMembership,
 } from '../../types'
 import { source } from './source'
-import { lmsContextMembershipSchema, LMSContextMembershipName } from './schemas/lmsContextMembership'
+import { LmsTableName } from './schemas'
+import { lmsContextMembershipSchema } from './schemas/lmsContextMembership'
 
 const lmsContextMembershipsCollection = source.collection<LMSContextMembership>(
-    LMSContextMembershipName,
+    LmsTableName.lmsContextMembership,
     lmsContextMembershipSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-lmscontextmemberships`
 )

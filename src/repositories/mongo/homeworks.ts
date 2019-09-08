@@ -8,10 +8,11 @@ import {
     Homework,
 } from '../../types'
 import { source } from './source'
-import { homeworkSchema, HomeworkName } from './schemas/homework'
+import { LmsTableName } from './schemas'
+import { homeworkSchema } from './schemas/homework'
 
 const homeworksCollection = source.collection<Homework>(
-    HomeworkName,
+    LmsTableName.homework,
     homeworkSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-homeworks`
 )

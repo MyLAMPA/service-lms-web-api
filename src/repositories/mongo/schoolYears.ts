@@ -7,10 +7,11 @@ import {
     SchoolYear,
 } from '../../types'
 import { source } from './source'
-import { schoolYearSchema, SchoolYearName } from './schemas/schoolYear'
+import { LmsTableName } from './schemas'
+import { schoolYearSchema } from './schemas/schoolYear'
 
 const schoolYearsCollection = source.collection<SchoolYear>(
-    SchoolYearName,
+    LmsTableName.schoolYear,
     schoolYearSchema,
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-schoolyears`
 )
