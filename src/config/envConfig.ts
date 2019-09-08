@@ -2,6 +2,9 @@
 const { env } = process
 
 export const envConfig = {
+    server: {
+        port: env.SERVER_PORT,
+    },
     auth: {
         accessTokenSecret: env.ACCESS_TOKEN_SECRET,
         accessKey: {
