@@ -2,15 +2,15 @@
 import { Schema, SchemaTypes } from 'mongoose'
 
 import {
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../types'
 import { LmsTableName } from '.'
 
 const lmsContextMembershipRoleEnum = [
-    LMSContextMembershipRole.freelancer,
-    LMSContextMembershipRole.student,
-    LMSContextMembershipRole.teacher,
-    LMSContextMembershipRole.admin,
+    LmsContextMembershipRole.freelancer,
+    LmsContextMembershipRole.student,
+    LmsContextMembershipRole.teacher,
+    LmsContextMembershipRole.admin,
 ]
 
 const lmsContextMembershipSchema = new Schema({

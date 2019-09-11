@@ -2,19 +2,19 @@
 import { Schema, SchemaTypes } from 'mongoose'
 
 import {
-    ContextStatus,
-    ContextMode,
+    LmsContextStatus,
+    LmsContextMode,
 } from '../../../types'
 import { LmsTableName } from '.'
 
 const lmsContextStatusEnum = [
-    ContextStatus.freetrial, ContextStatus.active,
-    ContextStatus.suspended, ContextStatus.archived,
+    LmsContextStatus.freetrial, LmsContextStatus.active,
+    LmsContextStatus.suspended, LmsContextStatus.archived,
 ]
 
 const lmsContextModeEnum = [
-    ContextMode.freelancer,
-    ContextMode.school,
+    LmsContextMode.freelancer,
+    LmsContextMode.school,
 ]
 
 const timetableSettings = {

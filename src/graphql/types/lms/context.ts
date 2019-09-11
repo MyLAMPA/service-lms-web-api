@@ -13,7 +13,7 @@ import * as moment from 'moment'
 
 import {
     LMSCtx,
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../types'
 import * as schoolYearsServices from '../../../services/lms/schoolYears'
 import * as subscriptionsServices from '../../../services/subscriptions'
@@ -49,7 +49,7 @@ export const Model = new GraphQLObjectType({
             async resolve({ contextId, role }: LMSCtx, {}, { state }: Request) {
                 let subscriptions = []
 
-                if (state.lmsCtx.role === LMSContextMembershipRole.freelancer || state.lmsCtx.role === LMSContextMembershipRole.admin) {
+                if (state.lmsCtx.role === LmsContextMembershipRole.freelancer || state.lmsCtx.role === LmsContextMembershipRole.admin) {
                     subscriptions = await subscriptionsServices.getSubscriptionsByLmsContext(contextId, state)
                 }
 

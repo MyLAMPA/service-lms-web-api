@@ -35,7 +35,7 @@ export type IDCtx = {
 
 export type LMSCtx = {
     contextId: string
-    role: LMSContextMembershipRole
+    role: LmsContextMembershipRole
     membershipId: string
     userId: number
     studentId: string
@@ -89,20 +89,20 @@ export type Image = {
 
 
 
-export type LMSContextMembership = {
+export type LmsContextMembership = {
     _id?: string
     emailAddress: string
     //userId: number
-    role: LMSContextMembershipRole
+    role: LmsContextMembershipRole
     lmsContext: string // string|Context
     teacher: string // string|Teacher
     student: string // string|Student
 }
 
-export type LMSContext = {
+export type LmsContext = {
     _id?: string
-    status: ContextStatus
-    mode: ContextMode
+    status: LmsContextStatus
+    mode: LmsContextMode
     createdAt: Date
     linkedSchoolId: number
     // billingInfo: string // string|BillingInfo
@@ -227,26 +227,27 @@ export enum ProductName {
     libraryNoLimit = 'LIBRARY_NO_LIMIT',
 }
 
-export enum LMSContextMembershipRole {
+export enum LmsContextMembershipRole {
     freelancer = 'freelancer',
     student = 'student',
     teacher = 'teacher',
     admin = 'admin',
 }
 
-export enum ContextStatus {
+export enum LmsContextStatus {
     freetrial = 'freetrial',
     active = 'active',
     suspended = 'suspended',
     archived = 'archived',
 }
 
-export enum ContextMode {
+export enum LmsContextMode {
     freelancer = 'freelancer',
     school = 'school',
 }
 
 export enum LessonStatus {
+    scheduled = 'scheduled',
     draft = 'draft',
     planned = 'planned',
     reported = 'reported',

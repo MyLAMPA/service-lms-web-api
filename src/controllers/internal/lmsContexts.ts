@@ -3,8 +3,8 @@ import { Request } from 'express'
 import * as _ from 'lodash'
 
 import {
-    LMSContext,
-    ContextStatus,
+    LmsContext,
+    LmsContextStatus,
 } from '../../types'
 import * as lmsContextsServices from '../../services/lms/lmsContexts'
 
@@ -19,7 +19,7 @@ export const patchLMSContext = async (req: Request) => {
     const { status } = req.body
    
     if (typeof status === 'string') {
-        await lmsContextsServices.setLMSContextStatus(lmsContextId, status as ContextStatus, req.state)
+        await lmsContextsServices.setLMSContextStatus(lmsContextId, status as LmsContextStatus, req.state)
     }
 
     return await lmsContextsServices.getLMSContextById(lmsContextId, req.state)

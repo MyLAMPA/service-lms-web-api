@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../../types'
 import { Model as GroupModel } from '../../../types/lms/group'
 import * as groupsServices from '../../../../services/lms/groups'
@@ -36,9 +36,9 @@ export const groups = {
         const searchParams: any = { context }
 
         switch (role) {
-            case LMSContextMembershipRole.admin:
-            case LMSContextMembershipRole.teacher:
-            case LMSContextMembershipRole.student:
+            case LmsContextMembershipRole.admin:
+            case LmsContextMembershipRole.teacher:
+            case LmsContextMembershipRole.student:
                 searchParams.students = { $in: [studentId] }
         }
 

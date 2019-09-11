@@ -10,7 +10,7 @@ import * as moment from 'moment'
 
 import {
     LMSCtx,
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../../types'
 import { Model as LessonModel } from '../../../types/lms/lesson'
 import * as lessonsServices from '../../../../services/lms/lessons'
@@ -44,10 +44,10 @@ export const lessons = {
     async resolve({ role, teacherId, studentId, contextId: context }: LMSCtx, { timeframeStart, timeframeEnd }, { state }: Request) {
         const searchParams: any = { context }
         switch (role) {
-            case LMSContextMembershipRole.teacher:
+            case LmsContextMembershipRole.teacher:
                 searchParams.teachers = { $in: [teacherId] }
                 break
-            case LMSContextMembershipRole.student:
+            case LmsContextMembershipRole.student:
                 searchParams.students = { $in: [studentId] }
                 break
         }

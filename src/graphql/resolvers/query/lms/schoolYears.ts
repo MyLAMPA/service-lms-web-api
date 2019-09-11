@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../../types'
 import { Model as SchoolYearModel } from '../../../types/lms/schoolYear'
 import * as schoolYearsServices from '../../../../services/lms/schoolYears'
@@ -22,8 +22,8 @@ export const schoolYears = {
         }
 
         switch (lmsCtx.role) {
-            case LMSContextMembershipRole.teacher:
-            case LMSContextMembershipRole.student:
+            case LmsContextMembershipRole.teacher:
+            case LmsContextMembershipRole.student:
                 return []
         }
 

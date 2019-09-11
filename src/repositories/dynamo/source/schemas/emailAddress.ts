@@ -9,9 +9,18 @@ const emailAddressSchema = new Schema({
             global: true,
         },
     },
-    name: {
+    email: {
         type: String,
+        index: {
+            global: true,
+        },
     },
+    //isVerified: {
+    //    type: Boolean,
+    //},
+    //userId: {
+    //    type: Number,
+    //},
 })
 
 export { emailAddressSchema }

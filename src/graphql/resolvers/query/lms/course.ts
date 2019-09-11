@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../../types'
 import { Model as CourseModel } from '../../../types/lms/course'
 import * as coursesServices from '../../../../services/lms/courses'
@@ -23,8 +23,8 @@ export const course = {
     async resolve({ role }: LMSCtx, { id }, { state }: Request) {
         if (!_.isNil(id)) {
             switch (role) {
-                case LMSContextMembershipRole.admin:
-                case LMSContextMembershipRole.teacher:
+                case LmsContextMembershipRole.admin:
+                case LmsContextMembershipRole.teacher:
                     const course = await coursesServices.getCourseById(id, state)
                     return course
             }
@@ -39,7 +39,7 @@ export const courses = {
     async resolve({ role, contextId: context }: LMSCtx, {}, { state }: Request) {
         const searchParams: any = { context }
 
-        if (role === LMSContextMembershipRole.student) {
+        if (role === LmsContextMembershipRole.student) {
             return []
         }
 

@@ -3,14 +3,15 @@ import { Request } from 'express'
 import * as _ from 'lodash'
 
 import {
-    LMSContext,
+    LmsContext,
 } from '../../types'
 import * as lmsContextsServices from '../../services/lms/lmsContexts'
 
 export const postLMSContexts = async (req: Request) => {
     const {} = req.body
 
-
+    return {}
+    await lmsContextsServices.createLmsContext(req.body, req.state)
 
     return null
 }

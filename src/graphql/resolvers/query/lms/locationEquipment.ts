@@ -8,7 +8,7 @@ import * as _ from 'lodash'
 
 import {
     LMSCtx,
-    LMSContextMembershipRole,
+    LmsContextMembershipRole,
 } from '../../../../types'
 import { Model as LocationEquipmentModel } from '../../../types/lms/locationEquipment'
 import * as locationEquipmentsServices from '../../../../services/lms/locationEquipments'
@@ -22,9 +22,9 @@ export const locationEquipment = {
     },
     async resolve({ role }: LMSCtx, { id }, { state }: Request) {
         switch (role) {
-            case LMSContextMembershipRole.admin:
-            case LMSContextMembershipRole.teacher:
-            case LMSContextMembershipRole.student:
+            case LmsContextMembershipRole.admin:
+            case LmsContextMembershipRole.teacher:
+            case LmsContextMembershipRole.student:
         }
 
         if (!_.isNil(id)) {
@@ -42,8 +42,8 @@ export const locationEquipments = {
         const searchParams: any = { context }
 
         switch (role) {
-            case LMSContextMembershipRole.teacher:
-            case LMSContextMembershipRole.student:
+            case LmsContextMembershipRole.teacher:
+            case LmsContextMembershipRole.student:
                 return []
         }
 

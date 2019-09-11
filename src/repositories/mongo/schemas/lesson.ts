@@ -16,7 +16,7 @@ const lessonSchema = new Schema({
     students:      [{ type: SchemaTypes.ObjectId, ref: LmsTableName.student }],
     start:          { type: SchemaTypes.Date, required: true },
     end:            { type: SchemaTypes.Date, required: true },
-    status:         { type: SchemaTypes.String, enum: [LessonStatus.draft, LessonStatus.planned, LessonStatus.reported, LessonStatus.canceled], default: LessonStatus.draft },
+    status:         { type: SchemaTypes.String, enum: [LessonStatus.scheduled, LessonStatus.draft, LessonStatus.planned, LessonStatus.reported, LessonStatus.canceled], default: LessonStatus.scheduled },
     lessonPlan:     {
         title:     { type: SchemaTypes.String, default: null },
         topic:     { type: SchemaTypes.String, default: null },

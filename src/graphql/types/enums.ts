@@ -1,6 +1,10 @@
 
 import { GraphQLEnumType } from 'graphql'
 
+import {
+    LessonStatus,
+} from '../../types'
+
 export const LMSContextStatusEnum = new GraphQLEnumType({
     name: 'LMSContextStatus',
     values: {
@@ -52,18 +56,11 @@ export const LMSContextMembershipRoleEnum = new GraphQLEnumType({
 export const LessonStatusEnum = new GraphQLEnumType({
     name: 'LessonStatus',
     values: {
-        draft: {
-            value: 'draft',
-        },
-        planned: {
-            value: 'planned',
-        },
-        reported: {
-            value: 'reported',
-        },
-        canceled: {
-            value: 'canceled',
-        },
+        [LessonStatus.scheduled]: { value: LessonStatus.scheduled },
+        [LessonStatus.draft]:     { value: LessonStatus.draft },
+        [LessonStatus.planned]:   { value: LessonStatus.planned },
+        [LessonStatus.reported]:  { value: LessonStatus.reported },
+        [LessonStatus.canceled]:  { value: LessonStatus.canceled },
     },
 })
 

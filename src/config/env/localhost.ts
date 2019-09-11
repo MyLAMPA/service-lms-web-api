@@ -5,7 +5,8 @@ export default {
         port: 8080,
     },
     mongoose: {
-        url: 'mongodb://127.0.0.1:27017/lampa',
+        uri: 'mongodb://127.0.0.1:27017',
+        db: 'lampa',
     },
     subscriptionManagementService: {
         baseUrl: 'http://localhost:3002',
