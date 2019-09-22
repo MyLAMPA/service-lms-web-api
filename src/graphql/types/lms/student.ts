@@ -7,8 +7,11 @@ import {
     GraphQLList,
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
 } from 'graphql'
 import * as _ from 'lodash'
+
+import * as lmsContextMembershipsServices from '../../../services/lms/lmsContextMemberships'
 
 export const Model = new GraphQLObjectType({
     name: 'Student',
@@ -17,27 +20,26 @@ export const Model = new GraphQLObjectType({
             type: GraphQLString,
             resolve: ({ _id }) => _id ? String(_id) : null,
         },
+        fullName: {
+            type: GraphQLString,
+        },
+        // email: {
+        //     type: GraphQLString,
+        //     async resolve(student, {}, { state }: Request) {
+        //         lmsContextMembershipsServices.getCurrentUserActiveMemberships
+        //     },
+        // },
+    },
+})
+
+export const CreateModel = new GraphQLInputObjectType({
+    name: 'CreateStudent',
+    fields: {
         email: {
             type: GraphQLString,
         },
-        name: {
-            type: GraphQLString,
-        },
         fullName: {
-            type: GraphQLString,
-            resolve: student => `${student.firstName} ${student.lastName}`,
-        },
-        firstName: {
-            type: GraphQLString,
-        },
-        lastName: {
-            type: GraphQLString,
-        },
-        abbr: {
-            type: GraphQLString,
-        },
-        color: {
-            type: GraphQLString,
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 })

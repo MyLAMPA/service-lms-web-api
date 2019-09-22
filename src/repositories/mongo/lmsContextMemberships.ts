@@ -16,6 +16,21 @@ const lmsContextMembershipsCollection = source.collection<LmsContextMembership>(
     `${config.mongoose.tablePrefix ? config.mongoose.tablePrefix + '-' : ''}lms-lmscontextmemberships`
 )
 
+export async function getLMSContextMembership(params: object, populateContext: boolean, state: State): Promise<LmsContextMembership> {
+    let contextMembershipExec = lmsContextMembershipsCollection.findOne(params)
+
+    if (populateContext) {
+        contextMembershipExec = contextMembershipExec.populate('lmsContext')
+    }
+
+    const contextMembership = await contextMembershipExec
+    if (_.isEmpty(contextMembership)) {
+        return null
+    }
+
+    return contextMembership as LmsContextMembership
+}
+
 export async function getLMSContextMemberships(params: object, populateContext: boolean, state: State): Promise<LmsContextMembership[]> {
     let contextMembershipsExec = lmsContextMembershipsCollection.find(params)
 

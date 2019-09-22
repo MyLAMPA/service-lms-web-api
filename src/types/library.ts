@@ -45,9 +45,15 @@ export interface Activity {
     slug?: string
     privacyPolicy: PrivacyPolicy
     title: string
+    description?: string
     procedure: Document
     duration?: number
     isRepeatable?: boolean
+    level: CEFLevel[]
+    skill: Skill[]
+    type: string[]
+    topic: string[]
+
     tags: {
         key: string
         name: string
@@ -55,13 +61,20 @@ export interface Activity {
     }[]
 }
 
+export enum Skill {
+    writing = 'writing',
+    listening = 'listening',
+    reading = 'reading',
+    speaking = 'speaking',
+}
+
 export enum CEFLevel {
     elementary = 'elementary',
-    preIntermediate = 'preIntermediate',
+    preIntermediate = 'preintermediate',
     intermediate = 'intermediate',
-    upperIntermediate = 'upperIntermediate',
+    upperIntermediate = 'upperintermediate',
     advanced = 'advanced',
-    veryAdvanced = 'veryAdvanced',
+    veryAdvanced = 'veryadvanced',
 }
 
 export enum RecomendedAge {

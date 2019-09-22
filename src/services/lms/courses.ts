@@ -9,12 +9,12 @@ import {
 } from '../../types'
 import { coursesRepository } from '../../repositories'
 
-export async function getCourses(params: object, state: State): Promise<Course[]> {
+export const getCourses = async(params: object, state: State): Promise<Course[]> => {
     const courses = await coursesRepository.getCourses(params, state)
     return courses
 }
 
-export async function getCourseById(courseId: string, state: State): Promise<Course> {
+export const getCourseById = async(courseId: string, state: State): Promise<Course> => {
     const course = await coursesRepository.getCourseById(courseId, state)
     if (course) {
         return course
@@ -22,16 +22,12 @@ export async function getCourseById(courseId: string, state: State): Promise<Cou
     throw errors.notFound('Course Not Found')
 }
 
-export async function createCourse(course: Course, state: State): Promise<Course> {
-    const document = _.merge(
-        {},
-        _.pick(course, ['name', 'abbr', 'description', 'color']),
-        { context: state.lmsCtx.contextId }
-    )
-    return await coursesRepository.createCourse(document, state)
+export const createCourse = async(course: Course, state: State): Promise<Course> => {
+    const createdCourse = await coursesRepository.createCourse({ context: state.lmsCtx.contextId, ...course }, state)
+    return createdCourse
 }
 
-export async function updateCourseById(courseId: string, change: object, state: State): Promise<Course> {
+export const updateCourseById = async(courseId: string, change: object, state: State): Promise<Course> => {
     await coursesRepository.updateCourseById(courseId, change, state)
     return getCourseById(courseId, state)
 }

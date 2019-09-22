@@ -3,6 +3,7 @@ import { GraphQLEnumType } from 'graphql'
 
 import {
     LessonStatus,
+    LocationType,
 } from '../../types'
 
 export const LMSContextStatusEnum = new GraphQLEnumType({
@@ -64,6 +65,16 @@ export const LessonStatusEnum = new GraphQLEnumType({
     },
 })
 
+export const LocationTypeEnum = new GraphQLEnumType({
+    name: 'LocationType',
+    values: {
+        [LocationType.classroom]: { value: LocationType.classroom },
+        [LocationType.remote]:    { value: LocationType.remote },
+        [LocationType.online]:    { value: LocationType.online },
+        [LocationType.other]:     { value: LocationType.other },
+    },
+})
+
 export const SubscriptionStatusEnum = new GraphQLEnumType({
     name: 'SubscriptionStatusEnum',
     values: {
@@ -75,6 +86,48 @@ export const SubscriptionStatusEnum = new GraphQLEnumType({
         },
         canceled: {
             value: 'canceled',
+        },
+    },
+})
+
+export const CEFLevelEnum = new GraphQLEnumType({
+    name: 'CEFLevelEnum',
+    values: {
+        elementary: {
+            value: 'elementary',
+        },
+        preintermediate: {
+            value: 'preintermediate',
+        },
+        intermediate: {
+            value: 'intermediate',
+        },
+        upperintermediate: {
+            value: 'upperintermediate',
+        },
+        advanced: {
+            value: 'advanced',
+        },
+        veryadvanced: {
+            value: 'veryadvanced',
+        },
+    },
+})
+
+export const ActivitySkillEnum = new GraphQLEnumType({
+    name: 'ActivitySkillEnum',
+    values: {
+        writing: {
+            value: 'writing',
+        },
+        listening: {
+            value: 'listening',
+        },
+        reading: {
+            value: 'reading',
+        },
+        speaking: {
+            value: 'speaking',
         },
     },
 })

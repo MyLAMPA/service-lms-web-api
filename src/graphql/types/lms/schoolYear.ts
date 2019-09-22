@@ -8,6 +8,7 @@ import {
     GraphQLList,
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
 } from 'graphql'
 import * as _ from 'lodash'
 import * as moment from 'moment'
@@ -31,6 +32,21 @@ export const Model = new GraphQLObjectType({
             type: GraphQLString,
             resolve: ({ end }) => !_.isNil(end) ?
                 moment(end).toISOString() : null,
+        },
+    },
+})
+
+export const CreateModel = new GraphQLInputObjectType({
+    name: 'CreateSchoolYear',
+    fields: {
+        title: {
+            type: GraphQLString,
+        },
+        start: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        end: {
+            type: new GraphQLNonNull(GraphQLString),
         },
     },
 })

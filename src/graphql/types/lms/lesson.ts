@@ -295,6 +295,12 @@ export const Model = new GraphQLObjectType({
         // activities:     [{ type: SchemaTypes.ObjectId, ref: 'LessonActivity' }],
         vocabularyList: {
             type: new GraphQLList(GraphQLString),
+            resolve(lesson, {}, { state }: Request) {
+                if (_.isArray(lesson.vocabularyList)) {
+                    return lesson.vocabularyList.map(item => String(item))
+                }
+                return []
+            },
         },
         // teachersNotes: {
         //     type: new GraphQLList(TeachersNoteModel),
@@ -318,19 +324,26 @@ export const Model = new GraphQLObjectType({
         outcomes: {
             type: new GraphQLList(LessonOutcomeModel),
         },
-        homeworks: {
+        dueHomeworks: {
             type: new GraphQLList(HomeworkModel),
             async resolve(lesson, {}, { state }: Request) {
-                const query = {
-                    $or: [
-                        { originLesson: lesson._id },
-                        { dueLesson: lesson._id },
-                    ]
-                }
-
+                const query = { dueLesson: lesson._id }
                 const homeworks = await homeworksServices.getHomeworks(query, true, true, state)
                 return homeworks
             },
         },
+        // homeworks: {
+        //     type: new GraphQLList(HomeworkModel),
+        //     async resolve(lesson, {}, { state }: Request) {
+        //         const query = {
+        //             $or: [
+        //                 { originLesson: lesson._id },
+        //                 { dueLesson: lesson._id },
+        //             ]
+        //         }
+        //         const homeworks = await homeworksServices.getHomeworks(query, true, true, state)
+        //         return homeworks
+        //     },
+        // },
     },
 })

@@ -9,6 +9,14 @@ import {
 } from '../../types'
 import { lmsContextMembershipsRepository } from '../../repositories'
 
+export async function getStudentMembership(lmsContextId: string, studentId: string, state: State) {
+    const lmsContextMembership = await lmsContextMembershipsRepository.getLMSContextMembership({ studentId, context: lmsContextId }, false, state)
+    if (lmsContextMembership) {
+        return lmsContextMembership
+    }
+    throw errors.notFound('LmsContextMembership Not Found')
+}
+
 export async function getCurrentUserActiveMemberships(state: State): Promise<LmsContextMembership[]> {
     const { emailAddresses } = state.idCtx
     const query = { isActive: true, emailAddress: { $in: emailAddresses } }
@@ -21,7 +29,7 @@ export async function getLMSContextMembershipById(lmsContextMembershipId: string
     if (lmsContextMembership) {
         return lmsContextMembership
     }
-    throw errors.notFound('LMSContextMembership Not Found')
+    throw errors.notFound('LmsContextMembership Not Found')
 }
 
 export async function createLMSContextMembership(lmsContextMembership: LmsContextMembership, state: State): Promise<LmsContextMembership> {

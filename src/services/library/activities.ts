@@ -88,7 +88,9 @@ export const createActivity = async(activity: Partial<Activity>, procedureDocume
         {},
         { slug: null, privacyPolicy: { isPublic: true } },
         { duration: null, isRepeatable: true, tags: [] },
+        { description: null },
         { procedure: { json: procedureDocument.json, text: procedureDocument.text } },
+        { level: [], skill: [], type: [], topic: [] },
         activity,
         { slug },
         { createdAt: new Date(), createdBy: state.idCtx.userId }
@@ -131,6 +133,9 @@ export const verifyPrivateActivityEligibility = async(state: State): Promise<voi
 }
 
 export const searchPublicActivities = async(query: string, pagination: Pagination, state: State): Promise<Edges<Activity>> => {
+    const activities = await activitiesRepository.getActivities({}, state)
+    return { edges: activities } as any
+
     const elasticQuery = {
         bool: {
             must:   { query_string: { query } },
@@ -138,21 +143,29 @@ export const searchPublicActivities = async(query: string, pagination: Paginatio
         },
     }
 
-    const elasticResponse = await activitiesRepository.elasticQueryActivities(
-        elasticQuery,
-        state,
-        pagination.size,
-        pagination.offset,
-    )
-
     const activityIds = []
-    for (const i in elasticResponse.hits.hits) {
-        const { _id, _type, _score } = elasticResponse.hits.hits[i]
-        activityIds.push(_id)
+    let edgesTotal = null
+    try {
+        const elasticResponse = await activitiesRepository.elasticQueryActivities(
+            elasticQuery,
+            state,
+            pagination.size,
+            pagination.offset,
+        )
+        console.log(elasticResponse)
+
+        for (const i in elasticResponse.hits.hits) {
+            const { _id, _type, _score } = elasticResponse.hits.hits[i]
+            activityIds.push(_id)
+        }
+
+        edgesTotal = elasticResponse.hits.total
+    } catch (err) {
+        console.error(err)
+        throw err
     }
 
     const edges = await getActivitiesByIds(activityIds, state)
-    const edgesTotal = elasticResponse.hits.total
 
     const previousCursor = pagination.previous()
     return {

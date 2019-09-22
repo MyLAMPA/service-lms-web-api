@@ -128,8 +128,7 @@ export type SchoolYear = {
 export type Student = {
     _id?: string
     context: string // string|Context
-    firstName: string
-    lastName: string
+    fullName: string
     color: string
 }
 
@@ -145,6 +144,7 @@ export type Teacher = {
 export type Location = {
     _id?: string
     context: string // string|Context
+    type: LocationType
     name: string
     abbr: string
     description: string
@@ -223,6 +223,11 @@ export enum BucketFolder {
     images = 'images',
 }
 
+export enum SkuId {
+    lmsForFreelancers = 'LMSF',
+    lmsForSchools = 'LMSS',
+}
+
 export enum ProductName {
     libraryNoLimit = 'LIBRARY_NO_LIMIT',
 }
@@ -244,6 +249,13 @@ export enum LmsContextStatus {
 export enum LmsContextMode {
     freelancer = 'freelancer',
     school = 'school',
+}
+
+export enum LocationType {
+    classroom = 'classroom',
+    remote = 'remote',
+    online = 'online',
+    other = 'other',
 }
 
 export enum LessonStatus {

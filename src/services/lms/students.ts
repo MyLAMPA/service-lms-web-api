@@ -12,12 +12,12 @@ import { studentsRepository } from '../../repositories'
 import * as lmsContextMembershipsServices from './lmsContextMemberships'
 import * as emailAddressesServices from '../emailAddresses'
 
-export async function getStudents(params: object, state: State): Promise<Student[]> {
+export const getStudents = async(params: object, state: State): Promise<Student[]> => {
     const students = await studentsRepository.getStudents(params, state)
     return students
 }
 
-export async function getStudentById(studentId: string, state: State): Promise<Student> {
+export const getStudentById = async(studentId: string, state: State): Promise<Student> => {
     const student = await studentsRepository.getStudentById(studentId, state)
     if (student) {
         return student
@@ -25,8 +25,8 @@ export async function getStudentById(studentId: string, state: State): Promise<S
     throw errors.notFound('Student Not Found')
 }
 
-export async function createStudent(student: Student, email: string, state: State): Promise<Student> {
-    const createdStudent = await studentsRepository.createStudent(student, state)
+export const createStudent = async(student: Student, email: string, state: State): Promise<Student> => {
+    const createdStudent = await studentsRepository.createStudent({ context: state.lmsCtx.contextId, ...student }, state)
 
     if (email) {
         const { id: emailAddressId } = await emailAddressesServices.getOrCreateByEmail(email, state)
@@ -40,4 +40,17 @@ export async function createStudent(student: Student, email: string, state: Stat
     }
 
     return createdStudent
+}
+
+export const bulkCreateStudents = async(batch: { student: Student; email?: string }[], state: State): Promise<Student[]> => {
+    const createdStudents = [] as Student[]
+    for (const i in batch) {
+        const { student, email } = batch[i]
+        try {
+            createdStudents.push(await createStudent(student, email, state))
+        } catch (err) {
+            throw err
+        }
+    }
+    return createdStudents
 }

@@ -31,3 +31,18 @@ export const Model = new GraphQLObjectType({
         },
     },
 })
+
+export const CreateModel = new GraphQLInputObjectType({
+    name: 'CreateCourse',
+    fields: {
+        name: {
+            type: GraphQLString,
+        },
+        description: {
+            type: GraphQLString,
+        },
+        abbr: {
+            type: GraphQLString,
+        },
+    },
+})

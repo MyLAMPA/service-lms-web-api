@@ -3,6 +3,7 @@ import * as _ from 'lodash'
 
 import { config } from '../../config'
 import {
+    Partial,
     State,
     Location,
 } from '../../types'
@@ -29,4 +30,9 @@ export async function getLocationById(locationId: string, state: State): Promise
         return location
     }
     return null
+}
+
+export const createLocation = async(location: Partial<Location>): Promise<Location> => {
+    const createdLocation = await locationsCollection.create(location)
+    return createdLocation
 }

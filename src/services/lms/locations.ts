@@ -9,12 +9,12 @@ import {
 } from '../../types'
 import { locationsRepository } from '../../repositories'
 
-export async function getLocations(params: object, populateEquipment: boolean, state: State): Promise<Location[]> {
+export const getLocations = async(params: object, populateEquipment: boolean, state: State): Promise<Location[]> => {
     const locations = await locationsRepository.getLocations(params, state)
     return locations
 }
 
-export async function getLocationById(locationId: string, state: State): Promise<Location> {
+export const getLocationById = async(locationId: string, state: State): Promise<Location> => {
     const location = await locationsRepository.getLocationById(locationId, state)
     if (location) {
         return location
@@ -22,15 +22,10 @@ export async function getLocationById(locationId: string, state: State): Promise
     throw errors.notFound('Location Not Found')
 }
 
-// export async function createLocation(location: Location, state: State): Promise<Location> {
-//     const _location = _.merge(
-//         {},
-//         _.pick(location, ['name', 'abbr', 'description', 'capacity', 'equipment', 'color']),
-//         { school: state.school._id }
-//     )
-//     const createdLocation = await db.locations.create(_location)
-//     return createdLocation.toObject()
-// }
+export const createLocation = async(location: Location, state: State): Promise<Location> => {
+    const createdLocation = await locationsRepository.createLocation({ context: state.lmsCtx.contextId, ...location })
+    return createdLocation
+}
 
 // export async function updateLocationById(locationId: string, change: object, state: State): Promise<Location> {
 //     await db.locations.findByIdAndUpdate(locationId, change)

@@ -7,6 +7,7 @@ import {
     GraphQLList,
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
 } from 'graphql'
 import * as _ from 'lodash'
 
@@ -17,21 +18,29 @@ export const Model = new GraphQLObjectType({
             type: GraphQLString,
             resolve: ({ _id }) => _id ? String(_id) : null,
         },
+        fullName: {
+            type: GraphQLString,
+        },
+        // email: {
+        //     type: GraphQLString,
+        // },
+        abbr: {
+            type: GraphQLString,
+        },
+        color: {
+            type: GraphQLString,
+        },
+    },
+})
+
+export const CreateModel = new GraphQLInputObjectType({
+    name: 'CreateTeacher',
+    fields: {
         email: {
             type: GraphQLString,
         },
-        name: {
-            type: GraphQLString,
-        },
         fullName: {
-            type: GraphQLString,
-            resolve: teacher => `${teacher.firstName} ${teacher.lastName}`,
-        },
-        firstName: {
-            type: GraphQLString,
-        },
-        lastName: {
-            type: GraphQLString,
+            type: new GraphQLNonNull(GraphQLString),
         },
         abbr: {
             type: GraphQLString,

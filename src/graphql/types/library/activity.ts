@@ -9,8 +9,13 @@ import {
     GraphQLList,
     GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
 } from 'graphql'
 
+import {
+    CEFLevelEnum,
+    ActivitySkillEnum,
+} from '../enums'
 import { edges } from '../edges'
 import {
     Model as DocumentModel,
@@ -42,6 +47,9 @@ export const Model = new GraphQLObjectType({
         title: {
             type: GraphQLString,
         },
+        description: {
+            type: GraphQLString,
+        },
         procedure: {
             type: DocumentModel,
         },
@@ -51,6 +59,19 @@ export const Model = new GraphQLObjectType({
         isRepeatable: {
             type: GraphQLBoolean,
         },
+        level: {
+            type: new GraphQLList(CEFLevelEnum),
+        },
+        skill: {
+            type: new GraphQLList(ActivitySkillEnum),
+        },
+        type: {
+            type: new GraphQLList(GraphQLString),
+        },
+        topic: {
+            type: new GraphQLList(GraphQLString),
+        },
+
         tags: {
             type: new GraphQLList(TagModel),
         },
@@ -60,9 +81,12 @@ export const Model = new GraphQLObjectType({
 export const Edges = edges(Model)
 
 export const CreateModel = new GraphQLInputObjectType({
-    name: 'Library_Activity_Create',
+    name: 'Library_CreateActivity',
     fields: {
         title: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        description: {
             type: GraphQLString,
         },
         procedure: {
@@ -73,6 +97,18 @@ export const CreateModel = new GraphQLInputObjectType({
         },
         isRepeatable: {
             type: GraphQLBoolean,
+        },
+        level: {
+            type: new GraphQLList(CEFLevelEnum),
+        },
+        skill: {
+            type: new GraphQLList(ActivitySkillEnum),
+        },
+        type: {
+            type: new GraphQLList(GraphQLString),
+        },
+        topic: {
+            type: new GraphQLList(GraphQLString),
         },
         tags: {
             type: new GraphQLList(TagCreateModel),
