@@ -25,7 +25,7 @@ export const createCourse = {
             type: new GraphQLNonNull(CreateCourseModel),
         },
     },
-    async resolve({ role, contextId: context }: LMSCtx, { course }, { state }: Request) {
+    async resolve({ role }: LMSCtx, { course }, { state }: Request) {
         switch (role) {
             case LmsContextMembershipRole.admin:
             case LmsContextMembershipRole.freelancer:

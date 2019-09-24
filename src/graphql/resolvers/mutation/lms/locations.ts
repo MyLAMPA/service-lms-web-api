@@ -25,7 +25,7 @@ export const createLocation = {
             type: new GraphQLNonNull(CreateLocationModel),
         },
     },
-    async resolve({ role, contextId: context }: LMSCtx, { location }, { state }: Request) {
+    async resolve({ role }: LMSCtx, { location }, { state }: Request) {
         switch (role) {
             case LmsContextMembershipRole.admin:
             case LmsContextMembershipRole.freelancer:

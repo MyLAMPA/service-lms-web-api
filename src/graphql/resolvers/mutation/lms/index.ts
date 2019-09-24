@@ -4,6 +4,7 @@ import {
     GraphQLObjectType,
     GraphQLString,
     GraphQLNonNull,
+    GraphQLList,
 } from 'graphql'
 
 import { httpErrors } from '../../../../errors'
@@ -17,10 +18,10 @@ export const lms = {
     type: new GraphQLObjectType({
         name: 'M_Lms_Context',
         fields: {
-            createLocation,
-            createCourse,
-            createStudents,
-            createTeachers,
+            createLocation: createLocation as any,
+            createCourse: createCourse as any,
+            createStudents: createStudents as any,
+            createTeachers: createTeachers as any,
         },
     }),
     args: {
